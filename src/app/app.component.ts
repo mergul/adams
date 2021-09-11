@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from './core/auth.service';
 import { NewsService } from './core/news.service';
 import { ReactiveStreamsService } from './core/reactive-streams.service';
 import { WindowRef } from './core/window.service';
@@ -15,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly destroy = new Subject<void>();
   private newslistUrl: string;
 
-  constructor(public authService: AuthService, private reactiveService: ReactiveStreamsService,
+  constructor(private reactiveService: ReactiveStreamsService,
     public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
     if (!this.reactiveService.random) {
       this.reactiveService.random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
