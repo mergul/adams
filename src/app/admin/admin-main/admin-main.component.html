@@ -1,0 +1,19 @@
+<div class="first">
+  <div class="bar">
+    <apx-chart #chart [series]="chartOptions.series!" [chart]="chartOptions.chart!" [xaxis]="chartOptions.xaxis!"
+      [markers]="chartOptions.markers!" [stroke]="chartOptions.stroke!" [yaxis]="chartOptions.yaxis!"
+      [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [legend]="chartOptions.legend!"
+      [fill]="chartOptions.fill!" [tooltip]="chartOptions.tooltip!"></apx-chart>
+  </div>
+  <div class="line">
+    <apx-chart #chartq [series]="chartqOptions.series!" [chart]="chartqOptions.chart!" [colors]="chartqOptions.colors!"
+      [dataLabels]="chartqOptions.dataLabels!" [stroke]="chartqOptions.stroke!" [xaxis]="chartqOptions.xaxis!"
+      [legend]="chartqOptions.legend!"></apx-chart>
+  </div>
+  <div class="donut">
+    <div class="container">
+      <apx-chart #chartd [series]="chartdOptions.series!" [chart]="chartdOptions.chart!"
+        [responsive]="chartdOptions.responsive!" [labels]="chartdOptions.labels!"></apx-chart>
+    </div>
+  </div>
+</div>

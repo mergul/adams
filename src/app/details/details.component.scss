@@ -1,0 +1,324 @@
+:host{
+    width: 100%;
+    margin: 0;
+}
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+ul, li {
+  list-style: none;
+}
+
+.top{
+  font-weight: 700;
+}
+main{
+    display: grid;
+    grid-template: 
+    "a b" auto
+    "c b" auto
+    "d b" 9fr / 2fr 1fr;
+    gap: .5rem;
+}
+.article-top{
+    grid-area: a;
+   // aspect-ratio: 2;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgb(226, 226, 240);
+}
+.article-se{
+    grid-area: b;
+  //  aspect-ratio: 3/13;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgb(239, 243, 232);
+    h5{
+      margin: 2rem .3rem;
+    }
+}
+.article-th{
+    grid-area: c;
+ //   aspect-ratio: 12;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgb(233, 243, 233);
+    display:flex;
+    align-items: center;
+}
+.article-fo{
+    grid-area: d;
+ //   aspect-ratio: 2/3;
+    object-fit: cover;
+    width: 100%;
+    background-color: #f4f4f4;
+    font-size: calc(10px + (26 - 16) * ((100vw - 300px) / (1600 - 300))) !important;
+    h4{
+      padding: 0.4rem 1rem 1rem;
+      text-transform: uppercase;
+      border-top: 1px solid;
+    }
+    p{line-height: 1.5; margin: 1rem}
+}
+img {
+    width: 100%;
+}
+.about {
+  a{
+    color: #000;
+    margin: 1rem
+  }
+}
+.mad{
+  display: inline-grid;
+  grid-auto-flow: row;
+}
+.participate{
+  display: grid;
+  background-color: ivory;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+
+.bu{
+  display: grid;
+  place-items: center; 
+}
+.part{
+  color: red;
+}
+.speaker a{
+    display: grid;
+    grid-auto-flow: column;
+    text-decoration: none;
+    gap: 0.5em;
+    color: #000;
+    line-height: 1.5;
+    span{
+      position: relative;
+    }
+  }
+.author_name{
+  font-weight: 700;
+}
+.author_in{
+    position: relative;
+    background-image: url("https://pe.tedcdn.com/images/ted/488d3d79b6d55373fcb10bc6efa0a84e1ceee169_254x191.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    margin-left: .4rem;
+}
+
+#tab1{
+    display: grid;
+     grid-template: "fo mo" auto / 3fr 1fr;
+     gap: .5em;
+}
+#tab2{
+    display: grid;
+    grid-template: 
+    "la ma" auto / 1fr 3fr;
+    gap: .5em
+}
+#tab3{
+    display: grid;
+    grid-template: 
+    "na pa" auto / 1fr 3fr;
+    gap: .5em;
+}
+.tab-slider--tabs {
+    display: flex;
+}
+  .tab-slider--trigger:hover::before {
+    transform: scale(1,1);
+  }
+  .tab-slider--trigger::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: black;
+    position: absolute;
+    top: -.25em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+  .tab-slider--trigger:hover {
+    color: rgb(77, 92, 224);
+  }
+  .tab-slider--trigger {
+    cursor: pointer;
+    margin: .5rem 1rem;
+    color: rgb(193, 20, 219);
+    opacity: 1;
+    white-space: nowrap;
+    position: relative;
+    transition: opacity 150ms ease-in-out;
+  }
+  .tab-slider--trigger.active {
+    color: rgb(77, 92, 224);
+  }
+  .tab-slider--trigger.active::before {
+    transform: scale(1, 1);
+  }
+  .tab-fo{
+      grid-area: fo;
+    //  aspect-ratio: 1/2.3;
+    object-fit: cover;
+    width: 100%;
+    gap: 1rem;
+    display: inline-grid;
+    grid-template-rows: auto auto auto auto;
+    section{
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .tab-mo{
+    grid-area: mo;
+   // aspect-ratio: 1/7;
+    object-fit: cover;
+    width: 100%;
+    display: grid;
+    gap: .5rem;
+    grid-template: "moin1" auto
+    "moin2" auto
+    "moin3" auto
+    "moin4" 1fr / auto;
+    p{
+      margin: 0;
+      padding: 0;
+    }
+  }
+.tab-moin1, .tab-moin2, .tab-moin3{
+  width: 100%;
+  a{
+    color:#525252;
+  }
+  span.num{
+    font-size: calc(16px + (26 - 16) * ((100vw - 300px) / (1600 - 300))) !important;
+  }
+}
+.tab-moin4{
+  grid-area: moin4;
+  width: 100%;
+}
+.tab-moin3{
+  grid-area: moin3;
+}
+.tab-moin2{
+  grid-area: moin2;
+}
+.tab-moin1{
+  grid-area: moin1;
+}
+.tab-la{
+    grid-area: la;
+  //  aspect-ratio: 1/10;
+    object-fit: cover;
+    width: 100%;
+    background-color: #fafaf8;
+}
+.tab-ma{
+    grid-area: ma;
+  //  aspect-ratio: 1/2.3;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgb(250, 250, 250);
+    padding: 1rem;
+    a{
+      color: #333;
+      font-weight: 700;
+      line-height: 1.1;
+      text-decoration: none;
+    }
+    p{
+      margin-left: 0;
+    }
+    h5{
+      color: red;
+      text-transform: uppercase;
+    }
+    section{
+      margin-bottom: 3rem;
+    }
+}
+.tab-na{
+    grid-area: na;
+  //  aspect-ratio: 1/10;
+    object-fit: cover;
+    width: 100%;
+    background-color: #f1f3f3;
+}
+.tab-pa{
+    grid-area: pa;
+ //   aspect-ratio: 1/2.3;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgb(242, 248, 248);
+    a{
+      color: #333;
+      font-weight: 700;
+      line-height: 1.1;
+      text-decoration: none;
+    }
+    p{
+      margin-left: 0;
+    }
+    h5{
+      color: red;
+      text-transform: uppercase;
+    }
+    section{
+      margin-bottom: 3rem;
+      padding: 1rem;
+    }
+}
+.myel{
+  display: grid;
+  background-color: #e9e9e9;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .5rem;
+  margin-bottom: 2rem;
+  img {
+    object-fit: cover;
+  }
+}
+figure{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    figcaption{
+      position: absolute;
+      background: rgba(0, 9, 0, 0.4);
+      color: #fff;
+      bottom: 0;
+    }
+}
+  @media screen and (max-width: 600px) {
+    main{
+    grid-template: "a" auto
+    "c" auto
+    "d" 9fr
+    "b" auto / 1fr;
+    }
+  }
+  // @supports(display: subgrid){
+  //   .tab-fo{
+  //     display: subgrid;
+  //     grid-template-rows: auto 1fr auto auto;
+  //     grid-auto-flow: row;
+  //   }
+  // }

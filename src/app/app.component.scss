@@ -1,0 +1,24 @@
+:host{
+    width: 100%;
+    display: grid;
+    grid-template:
+      "header" minmax(4rem, max-content)
+      "content" 1fr
+      "footer" max-content / 1fr;
+  }
+  app-header {
+    grid-area: header;
+  }
+  router-outlet {
+   display: none; // Fix router outlet from influencing the grid
+  }
+  [content] {
+    grid-area: content;
+  }
+  router-outlet + * {
+    grid-area: content;
+  }
+  app-footer {
+    grid-area: footer;
+  }
+  

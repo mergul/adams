@@ -1,0 +1,30 @@
+
+.first{
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+}
+.donut{
+  //width: calc(50% - .5rem);
+  background-color: azure;
+  // ::ng-deep svg foreignObject + g *{
+  //   max-height: 200px;
+  // }
+  .container{
+    max-width: 460px;
+  }
+}
+.bar{
+  background-color: azure;
+  padding: 0;
+}
+.line{
+  background-color: azure;
+  padding: 0;
+}
+@media screen and (max-width: 600px) {
+  .first{
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}

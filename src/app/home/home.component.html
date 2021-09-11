@@ -1,0 +1,143 @@
+<main>
+  <article class="article-top">
+    <section class="fi">
+    <figure class="figure">
+      <img class="figure-img" src="assets/abc.jpeg" alt="hu" />
+      <figcaption>Üyelik Çok Avantajlı</figcaption>
+    </figure>
+    </section>
+    <section class="prf">
+      <h1 class="article-title">Üyelik Avantajlarından Yararlanın!</h1>
+      <p class="article-prf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br>
+        <button class="butto ripple button-outline ">Katıl</button>
+      </p>
+    </section>
+  </article>
+  <article class="recommend">
+      <div class="head">
+        <h1>Adam Recommends</h1>
+        <p>Talks recommended just for you, delivered to your inbox</p>
+      </div>
+      <h2 class="quest">What interests you?</h2>
+      <div class="content">
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag1">
+          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+      </div>    
+  </article>
+  <article class="container">
+    <h2>En Yeniler</h2>
+    <div class="carousel" id="car_on">
+      <ul class="carousel__viewport" #carousel id="car_one">
+        <li *ngFor="let it of list; let i=index;" class="carousel__slide" id="image-{{i+1}}" >
+        <figure class="figure-carousel" (click)="go()" >
+          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <figcaption>Yosemite{{i+1}}</figcaption>
+        </figure>
+          <a (click)="onNav($event, 'image-', i+1, false, 3)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
+          <a (click)="onNav($event, 'image-', i+1, true, 3)" class="carousel__next"skipLocationChange:true>Go to next slide</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="article-mi">
+    <section class="prf">
+      <h1 class="article-title">Üyelik Avantajlarından Yararlanın!</h1>
+      <p class="article-prf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br>
+        <button class="butto ripple button-outline ">Katıl</button>
+      </p>
+    </section>
+    <section class="fi">
+    <figure class="figure">
+      <img class="figure-img" src="assets/abc.jpeg" alt="hu" />
+      <figcaption>Üyelik Çok Avantajlı</figcaption>
+    </figure>
+    </section>
+  </article>
+  <article class="container micon" id="icon-carousel">
+    <h2>En Çok İzlenenler</h2>
+    <div class="carousel" id="car_tw">
+      <ul class="carousel__viewport" #micarousel  id="car_two">
+        <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="myimage-{{i+1}}" >
+        <figure class="mifig figure-carousel">
+          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <figcaption>Yosemite{{i+1}}</figcaption>
+        </figure>
+          <a (click)="onNav($event, 'myimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
+          <a (click)="onNav($event, 'myimage-', i+1, true, 6)" class="carousel__next"skipLocationChange:true>Go to next slide</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="container micon" id="icon-carousel1">
+    <h2>İtikad</h2>
+    <div class="carousel" id="car_th">
+      <ul class="carousel__viewport"  id="car_thr">
+        <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="yimage-{{i+1}}">
+          <figure class="mifig figure-carousel">
+          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <figcaption>Yosemite{{i+1}}</figcaption>
+        </figure>
+          <a (click)="onNav($event, 'yimage-', i+1, false, 6)"  class="carousel__prev" skipLocationChange:true>Go to last slide</a>
+          <a (click)="onNav($event, 'yimage-', i+1, true, 6)" class="carousel__next"skipLocationChange:true>Go to next slide</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <article class="container micon"  id="icon-carousel2">
+    <h2>Kelam</h2>
+    <div class="carousel" id="car_fo">
+      <ul class="carousel__viewport"  id="car_fou">
+        <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="mimage-{{i+1}}">
+          <figure class="mifig figure-carousel">
+          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <figcaption>Yosemite{{i+1}}</figcaption>
+        </figure>
+        <a (click)="onNav($event, 'mimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
+        <a (click)="onNav($event, 'mimage-', i+1, true, 6)" class="carousel__next"skipLocationChange:true>Go to next slide</a>
+      </li>
+      </ul>
+    </div>
+  </article>
+  <article class="container micon" id="icon-carousel3">
+    <h2>Fıkıh</h2>
+    <div class="carousel" id="car_fi">
+      <ul class="carousel__viewport"  id="car_fif">
+        <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="ymimage-{{i+1}}">
+          <figure class="mifig figure-carousel">
+          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <figcaption>Yosemite{{i+1}}</figcaption>
+        </figure>
+        <a (click)="onNav($event, 'ymimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
+        <a (click)="onNav($event, 'ymimage-', i+1, true, 6)" class="carousel__next"skipLocationChange:true>Go to next slide</a>
+      </li>
+      </ul>
+    </div>
+  </article>
+</main>
+<router-outlet></router-outlet>

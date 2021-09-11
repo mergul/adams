@@ -1,0 +1,25 @@
+<main>
+  <section class="top">
+    <img align="left" class="image-bg" src="assets/back-img.jpeg" alt="asel" />
+    <img align="left" class="image-profile" src="assets/profile-img.jpeg" alt="asel" />
+  </section>
+  <section class="paths">
+    <ol><li *ngFor="let item of masterBreadcrumbList">
+       <a [routerLink]="item">{{item}}</a>
+    </li></ol>
+  </section>
+  <section class="side"  (click)="viewMode =false">
+    <article class="resume">
+      <h4>Özgeçmiş</h4>
+      <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
+    </article>
+    <button routerLink="contents" [class.active]="viewMode">içerikler</button>
+    <button routerLink="followee" [state]="{'link': '0'}">izlenen kişiler</button>
+    <button routerLink="followco" [state]="{'link': '1'}">izlenen konular</button>
+    <button routerLink="followers" [state]="{'link': '2'}">takipçiler</button>
+    <button routerLink="user-edit">güncelle</button>
+  </section>
+  <section class="center">
+   <router-outlet></router-outlet>
+  </section>
+</main>
