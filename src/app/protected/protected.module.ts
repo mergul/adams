@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { getApp } from '@angular/fire/app';
 import { provideAuth, initializeAuth, indexedDBLocalPersistence, browserPopupRedirectResolver, Auth } from '@angular/fire/auth';
-import { ProtectedComponent } from './protected.component';
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
   {
-    path: '', component: ProtectedComponent
+    path: ''
   },
   {
     path: 'user', loadChildren: () =>
@@ -28,9 +28,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [
-    ProtectedComponent
-  ],
+  declarations: [ ],
   imports: [
     CommonModule, RouterModule.forChild(routes),
     provideAuth(() => {
@@ -44,6 +42,7 @@ const routes: Routes = [
       return auth;
     })
   ],
-  providers: []
+  providers: [AuthService],
+  exports: [RouterModule]
 })
 export class ProtectedModule { }

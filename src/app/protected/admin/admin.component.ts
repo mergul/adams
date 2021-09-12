@@ -12,7 +12,7 @@ import { LazyLoadScriptService } from './lazy-load-script.service';
 export class AdminComponent implements OnInit, OnDestroy {
   scriptSubscription!: Subscription;
   constructor(private renderer: Renderer2, private scriptService: LazyLoadScriptService,
-    @Inject(DOCUMENT) private _document: Document){
+    @Inject(DOCUMENT) private _document: Document, private authService: AuthService){
     this.scriptService.renderer=renderer;
     this.scriptService.document=_document;
   }

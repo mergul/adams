@@ -8,7 +8,6 @@ import { AdminMainComponent } from './admin-main/admin-main.component';
 import { AdminViewsComponent } from './admin-views/admin-views.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AuthGuard } from '../auth.guard';
-import { AuthService } from '../auth.service';
 
 const routes: Routes = [
   {
@@ -44,6 +43,6 @@ const routes: Routes = [
   imports: [
     CommonModule, RouterModule.forChild(routes), NgApexchartsModule
   ],
-  providers: [AuthService, AuthGuard]
+  providers: [ AuthGuard ]
 })
 export class AdminModule { }

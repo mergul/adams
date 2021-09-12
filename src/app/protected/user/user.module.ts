@@ -6,7 +6,6 @@ import { UserContentsComponent } from './user-contents/user-contents.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { AuthGuard } from '../auth.guard';
-import { AuthService } from '../auth.service';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [AuthGuard],
@@ -28,6 +27,6 @@ const routes: Routes = [
   imports: [
     CommonModule, RouterModule.forChild(routes)
   ],
-  providers: [AuthService, AuthGuard]
+  providers: [AuthGuard]
 })
 export class UserModule { }

@@ -2,7 +2,7 @@
   <article class="article-top">
     <section class="fi">
     <figure class="figure">
-      <img class="figure-img" src="assets/abc.jpeg" alt="hu" />
+      <img class="figure-img" src="assets/abc.jpeg" width="718px" height="300px" alt="hu" />
       <figcaption>Üyelik Çok Avantajlı</figcaption>
     </figure>
     </section>
@@ -22,32 +22,32 @@
       <div class="content">
         <label for="tag1">
           <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
-        <label for="tag1">
-          <input type="checkbox" id="tag1" value="tag1">etiket1</label>
+        <label for="tag2">
+          <input type="checkbox" id="tag2" value="tag1">etiket1</label>
+        <label for="tag3">
+          <input type="checkbox" id="tag3" value="tag1">etiket1</label>
+        <label for="tag4">
+          <input type="checkbox" id="tag4" value="tag1">etiket1</label>
+        <label for="tag5">
+          <input type="checkbox" id="tag5" value="tag1">etiket1</label>
+        <label for="tag6">
+          <input type="checkbox" id="tag6" value="tag1">etiket1</label>
+        <label for="tag7">
+          <input type="checkbox" id="tag7" value="tag1">etiket1</label>
+        <label for="tag8">
+          <input type="checkbox" id="tag8" value="tag1">etiket1</label>
+        <label for="tag9">
+          <input type="checkbox" id="tag9" value="tag1">etiket1</label>
+        <label for="tag10">
+          <input type="checkbox" id="tag10" value="tag1">etiket1</label>
+        <label for="tag11">
+          <input type="checkbox" id="tag11" value="tag1">etiket1</label>
+        <label for="tag12">
+          <input type="checkbox" id="tag12" value="tag1">etiket1</label>
+        <label for="tag13">
+          <input type="checkbox" id="tag13" value="tag1">etiket1</label>
+        <label for="tag14">
+          <input type="checkbox" id="tag14" value="tag1">etiket1</label>
       </div>    
   </article>
   <article class="container">
@@ -56,7 +56,7 @@
       <ul class="carousel__viewport" #carousel id="car_one">
         <li *ngFor="let it of list; let i=index;" class="carousel__slide" id="image-{{i+1}}" >
         <figure class="figure-carousel" (click)="go()" >
-          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <img class="gallery__img" [src]="it" width="480px" height="363px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
           <a (click)="onNav($event, 'image-', i+1, false, 3)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
@@ -74,7 +74,7 @@
     </section>
     <section class="fi">
     <figure class="figure">
-      <img class="figure-img" src="assets/abc.jpeg" alt="hu" />
+      <img class="figure-img" src="assets/abc.jpeg" width="718px" height="300px" alt="hu" />
       <figcaption>Üyelik Çok Avantajlı</figcaption>
     </figure>
     </section>
@@ -85,7 +85,7 @@
       <ul class="carousel__viewport" #micarousel  id="car_two">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="myimage-{{i+1}}" >
         <figure class="mifig figure-carousel">
-          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <img class="gallery__img" [src]="it" width="236px" height="133px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
           <a (click)="onNav($event, 'myimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
@@ -100,7 +100,7 @@
       <ul class="carousel__viewport"  id="car_thr">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="yimage-{{i+1}}">
           <figure class="mifig figure-carousel">
-          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <img class="gallery__img" [src]="it" width="236px" height="133px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
           <a (click)="onNav($event, 'yimage-', i+1, false, 6)"  class="carousel__prev" skipLocationChange:true>Go to last slide</a>
@@ -115,7 +115,7 @@
       <ul class="carousel__viewport"  id="car_fou">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="mimage-{{i+1}}">
           <figure class="mifig figure-carousel">
-          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <img class="gallery__img" [src]="it" width="236px" height="133px"  alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
         <a (click)="onNav($event, 'mimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>
@@ -130,7 +130,7 @@
       <ul class="carousel__viewport"  id="car_fif">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="ymimage-{{i+1}}">
           <figure class="mifig figure-carousel">
-          <img class="gallery__img" [src]="it" alt="Yosemite{{i+1}}" />
+          <img class="gallery__img" [src]="it" width="236px" height="133px"  alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
         <a (click)="onNav($event, 'ymimage-', i+1, false, 6)" class="carousel__prev" skipLocationChange:true>Go to last slide</a>

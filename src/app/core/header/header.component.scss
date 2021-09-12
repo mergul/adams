@@ -36,6 +36,8 @@ header {
   height: 100%;
   display: flex;
   align-items: center;
+ // visibility: visible;
+  opacity: 1;
 }
 
 .nav-toggle-label span,
@@ -115,7 +117,9 @@ nav a:hover, nav button:hover {
 
 @media screen and (min-width: 800px) {
   .nav-toggle-label {
-    display: none;
+   // display: none;
+ //  visibility: hidden;
+   opacity: 0;
   }
 
 //Navigation menu
@@ -127,7 +131,7 @@ nav a:hover, nav button:hover {
 //Dropdown menu
 .nav-item-dropdown {
   position: relative;
-  
+//  margin-left: 0 !important;
   &:hover > .dropdown-menu {
     visibility: visible;
     opacity: 1;
@@ -234,7 +238,6 @@ nav a:hover, nav button:hover {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 80%;
   }
   
   nav li {
@@ -304,7 +307,8 @@ nav a:hover, nav button:hover {
   border-radius: 1rem;
   padding: 0 .75rem;
   img{
-    width: 1rem;
+   // width: 1rem;
+   margin-left: -.4rem;
   }
   input[type="text"]{
     width: 100%;

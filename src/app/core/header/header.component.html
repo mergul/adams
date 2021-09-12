@@ -1,6 +1,8 @@
 <header>
   <div class="logo">
-    <a routerLink="/home"><h1 class="logos">Adam</h1></a>
+    <a routerLink="/home">
+      <h1 class="logos">Adam</h1>
+    </a>
   </div>
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-toggle-label">
@@ -27,19 +29,17 @@
       <li><a routerLink="secure/admin">Contact</a></li>
       <li class="divider">
         <div class="search-box">
-          <img class="simg" src="assets/search.png" alt="Search" />
+          <img class="simg" src="assets/search.png" width="26px" height="27px" alt="Search" />
           <input type="text" placeholder="Search">
         </div>
       </li>
-      <li *ngIf="!isLogged">
-        <a routerLink="secure/sign">Giriş Yap</a>
-      </li>
-      <li *ngIf="isLogged" class="nav-item-dropdown navuser">
-          <figure class="user online dropdown-trigger">
-            <img src="assets/profile-img.jpeg" class="online-user" alt="user" />
-            <figcaption>{{name}}</figcaption>
-          </figure>
-        <ul class="dropdown-menu">
+      <li class="nav-item-dropdown navuser" [ngSwitch]="isLogged">
+        <a routerLink="secure/sign" *ngSwitchCase="false">Giriş Yap</a>
+        <figure *ngSwitchCase="true" class="user online dropdown-trigger">
+          <img src="assets/profile-img.jpeg" class="online-user" width="50px" height="50px" alt="user" />
+          <figcaption>{{name}}</figcaption>
+        </figure>
+        <ul *ngSwitchCase="true" class="dropdown-menu">
           <li class="dropdown-menu-item">
             <a routerLink="secure/user">Hesabım</a>
           </li>
