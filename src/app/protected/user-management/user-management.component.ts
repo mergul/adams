@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from '../auth.service';
 
 export class UserManagementActions {
   static resetPassword = 'resetPassword';
@@ -63,7 +63,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
                 // Invalid or expired action code. Ask user to try to
                 // reset the password again.
                 alert(e);
-                this.router.navigate(['/login']);
+                this.router.navigate(['secure/sign']);
               });
             } break;
             case UserManagementActions.recoverEmail: {
@@ -74,7 +74,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
             } break;
             default: {
               console.log('query parameters are missing');
-              this.router.navigate(['/login']);
+              this.router.navigate(['secure/sign']);
             }
           }
         });
@@ -104,7 +104,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         .then(resp => {
           // Password reset has been confirmed and new password updated.
           alert('New password has been saved');
-          this.router.navigate(['/login']);
+          this.router.navigate(['secure/sign']);
         }).catch((e: any) => {
       // Error occurred during confirmation. The code might have
       // expired or the password is too weak.

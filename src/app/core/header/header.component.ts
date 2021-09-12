@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +8,23 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
+  @Output() logoutChange!: EventEmitter<boolean>;
   me!: any;
   name!: string;
   query !: any;
+  _isLogged!: boolean;
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.isLogged;
+  constructor(private userService: UserService, private router: Router) {
+    this.logoutChange= this.userService.logoutEmitter;
+    this.userService.changeEmitter.subscribe(re => {
+        this._isLogged = re.isIn;
+        this.name = re.name;
+    });
+    const fgh = localStorage.getItem('username');
+    if (fgh) {
+      this.name = JSON.parse(fgh);
+      this._isLogged = true;
+    } else this._isLogged = false;
   }
   ngAfterViewInit(): void {
     if (this.query.matches) {
@@ -28,27 +39,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
   }
   get isLogged() {
-    this.getName();
-    return !!this.name;
+    return this._isLogged;
   }
-  getName() {
-    const miuser = localStorage.getItem('user');
-    if (miuser && miuser !== 'null') {
-      this.me = JSON.parse(miuser);
-      this.name = this.me.displayName;
-    }
+  set isLogged(value: boolean) {
+    this._isLogged = value;
   }
+  
   ngOnInit() {
     this.query = window.matchMedia("(max-width: 800px)");
   }
   signOut() {
-    this.auth.signOut();
+   this._isLogged=false;
+   this.logoutChange.emit(false);
     this.name = '';
-    // document.querySelector('.navuser .dropdown-trigger')?.classList.add('passive');
-    // setTimeout(() => {
-    //   document.querySelector('.navuser .dropdown-trigger')?.classList.add('active');
-    // }, 2000);
-    if (this.router.url.startsWith('/user'))
+    if (this.router.url.startsWith('secure'))
       this.router.navigate(['/home']);
   }
 }

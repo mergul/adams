@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { WindowRef } from './window.service';
-import { TokenInterceptor } from './token.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
- import { getApp } from '@angular/fire/app';
- import { provideAuth, initializeAuth, indexedDBLocalPersistence, browserPopupRedirectResolver } from '@angular/fire/auth';
+import { UserService } from './user.service';
+import { LoaderService } from './loader.service';
+import { NewsService } from './news.service';
+import { ReactiveStreamsService } from './reactive-streams.service';
 
 const routes: Routes = [
 ];
@@ -17,24 +16,8 @@ const routes: Routes = [
   declarations: [FooterComponent, HeaderComponent],
   imports: [
     CommonModule, RouterModule.forChild(routes), HttpClientModule,
-    provideAuth(() => {
-      const auth = initializeAuth(getApp(), {
-        persistence: indexedDBLocalPersistence,
-        popupRedirectResolver: browserPopupRedirectResolver,
-      });
-      // if (environment.useEmulators) {
-      //   connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
-      // }
-      return auth;
-    }),
   ],
-  providers: [AuthService, WindowRef,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
+  providers: [ WindowRef, UserService, LoaderService, NewsService, ReactiveStreamsService],
   exports: [FooterComponent, HeaderComponent]
 })
 export class CoreModule { }

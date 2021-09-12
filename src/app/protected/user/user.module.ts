@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
-import { AuthGuard } from '../core/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { UserContentsComponent } from './user-contents/user-contents.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { AuthGuard } from '../auth.guard';
+import { AuthService } from '../auth.service';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [AuthGuard],
@@ -26,6 +27,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule, RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [AuthService, AuthGuard]
 })
 export class UserModule { }

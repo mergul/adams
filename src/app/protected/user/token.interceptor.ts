@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { LoaderService } from './loader.service';
-import { AuthService } from './auth.service';
+import { LoaderService } from '../../core/loader.service';
+import { AuthService } from '../auth.service';
 
 const methods = ['PUT', 'POST', 'DELETE', 'PATCH'];
 

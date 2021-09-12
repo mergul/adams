@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    @ViewChild('carousel', { read: ElementRef, static: false }) carousel!: ElementRef;
    @ViewChild('micarousel', { read: ElementRef, static: false }) micarousel!: ElementRef;
 
-  constructor(private router: Router,) {
+  constructor(private router: Router) {
   }
   myFrag!: HTMLElement | null;
   lastRoutePath?: string;

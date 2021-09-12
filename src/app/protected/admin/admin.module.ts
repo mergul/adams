@@ -4,10 +4,11 @@ import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { AdminAsideComponent } from './admin-aside/admin-aside.component';
-import { AuthGuard } from '../core/auth.guard';
 import { AdminMainComponent } from './admin-main/admin-main.component';
 import { AdminViewsComponent } from './admin-views/admin-views.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AuthGuard } from '../auth.guard';
+import { AuthService } from '../auth.service';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule, RouterModule.forChild(routes), NgApexchartsModule
-  ]
+  ],
+  providers: [AuthService, AuthGuard]
 })
 export class AdminModule { }

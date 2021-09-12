@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -23,11 +24,12 @@ export class AuthGuard implements CanActivate {
     //     return true;
     //   });
     // } else {
-      if (!this.authService.isLoggedIn) {
+   return this.authService.isLoggedIn.pipe(map(isLoggedIn => {
+      if (!isLoggedIn.isIn) {
         localStorage.setItem('returnUrl', state.url);
-        this.router.navigate(['/sign']);
+        this.router.navigate(['secure/sign']);
       }
       return true;
-   // }
+    }));
   }
 }

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NewsService } from './core/news.service';
 import { ReactiveStreamsService } from './core/reactive-streams.service';
@@ -13,6 +13,7 @@ import { WindowRef } from './core/window.service';
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly destroy = new Subject<void>();
   private newslistUrl: string;
+  _loggedinUser = false;
 
   constructor(private reactiveService: ReactiveStreamsService,
     public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
@@ -21,7 +22,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.newslistUrl = '/sse/chat/room/TopNews' + this.reactiveService.random + '/subscribeMessages';
   }
-
+  receiveMessage($event) {
+    this._loggedinUser = $event;
+    console.log('receiveMessage --> '+$event);
+  }
   ngOnInit(): void {
 
   }

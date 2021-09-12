@@ -8,23 +8,23 @@
   </label>
   <nav>
     <ul>
-      <li><a routerLink="home">Home</a></li>
-      <li><a routerLink="home">About</a></li>
+      <li><a routerLink="/home">Home</a></li>
+      <li><a routerLink="/home">About</a></li>
       <li class="nav-item nav-item-dropdown">
-        <a class="dropdown-trigger" routerLink="home">Blog</a>
+        <a class="dropdown-trigger" routerLink="/home">Blog</a>
         <ul class="dropdown-menu">
           <li class="dropdown-menu-item">
-            <a routerLink="home">blog entry</a>
+            <a routerLink="/home">blog entry</a>
           </li>
           <li class="dropdown-menu-item">
-            <a routerLink="home">blog entry</a>
+            <a routerLink="/home">blog entry</a>
           </li>
           <li class="dropdown-menu-item">
-            <a routerLink="home">blog entry</a>
+            <a routerLink="/home">blog entry</a>
           </li>
         </ul>
       </li>
-      <li><a routerLink="admin">Contact</a></li>
+      <li><a routerLink="secure/admin">Contact</a></li>
       <li class="divider">
         <div class="search-box">
           <img class="simg" src="assets/search.png" alt="Search" />
@@ -32,7 +32,7 @@
         </div>
       </li>
       <li *ngIf="!isLogged">
-        <a routerLink="sign">Giriş Yap</a>
+        <a routerLink="secure/sign">Giriş Yap</a>
       </li>
       <li *ngIf="isLogged" class="nav-item-dropdown navuser">
           <figure class="user online dropdown-trigger">
@@ -41,10 +41,10 @@
           </figure>
         <ul class="dropdown-menu">
           <li class="dropdown-menu-item">
-            <a routerLink="user/contents">Hesabım</a>
+            <a routerLink="secure/user">Hesabım</a>
           </li>
           <li class="dropdown-menu-item">
-            <a routerLink="user/user-edit">Güncelle</a>
+            <a routerLink="secure/user/user-edit">Güncelle</a>
           </li>
           <li class="dropdown-menu-item">
             <button (click)="signOut()">Çıkış</button>

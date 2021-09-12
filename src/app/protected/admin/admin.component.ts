@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
 import { LazyLoadScriptService } from './lazy-load-script.service';
 
 @Component({
@@ -16,10 +17,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.scriptService.document=_document;
   }
   ngOnInit() {
-    this.scriptSubscription = this.scriptService.loadScript('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css','link')
-    .subscribe(data=>{
-      console.log(data);
-    });
+    this.scriptService.loadScripts([{'name': 'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css', 'type': 'link'},{'name': 'node_modules/apexcharts/dist/apexcharts.min.js', 'type':  'js'}]).map(res=>{
+      this.scriptSubscription =  res.subscribe(data=>{
+        console.log(data);
+      });
+    })
   }
   ngOnDestroy(): void {
     this.scriptSubscription.unsubscribe();

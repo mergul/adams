@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../core/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +19,16 @@ export class SignGuard implements CanActivate {
             const returnUrl = localStorage.getItem('returnUrl');
             console.log('returnUrl --> '+returnUrl);
             localStorage.setItem('is', '0');
-            this.router.navigate([returnUrl ? returnUrl : 'user']);
+            this.router.navigate([returnUrl ? returnUrl : 'secure/user']);
           }
           return true;
         });
       } else {
        return this.authService.isLoggedIn.pipe(map(isLoggedIn => {
-          if (isLoggedIn) {
+          if (isLoggedIn.isIn) {
             const returnUrl = this.router.url;
             console.log('returnUrl --> '+returnUrl);
-            this.router.navigate([returnUrl ? returnUrl : 'user']);
+            this.router.navigate([returnUrl ? returnUrl : 'secure/user']);
           }
           return true;
         }))
