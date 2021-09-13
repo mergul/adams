@@ -23,7 +23,7 @@ article.article-top{
       section.fi{
         margin: auto;
         flex: 1 1 30%;
-        min-width: 105px;
+        min-width: 151px;
       }
       section.prf{
         flex: 1 1 70%;
@@ -42,6 +42,7 @@ article.article-top{
     img {
       max-width: 102%;
       object-fit: cover;
+      height: calc(154*(100vw/1503));
     }
     figcaption{
         position: absolute;
@@ -62,14 +63,29 @@ article.article-top{
     margin: 0;
     padding: 0 10px 0 10px;
   }
+  @media screen and (max-width: 800px) {
+    .figure{
+      img {
+        height: calc(210*(100vw/1503)) !important;
+      }
+    }
+  }
+
   // @media screen and (max-width: 1030px) {
   //   .prf{
   //      grid-column: auto / span 2 !important;
   //   }
   // }
-  // @media screen and (max-width: 600px) {
-  //   .prf{
-  //     width: 62vw !important;
-  //     grid-column: 1 / span 1 !important;
-  //   }
-  // }
+  @media screen and (max-width: 600px) {
+    article.article-top{
+      a{
+        section.fi{
+          min-width: 110px;
+        }
+      }
+    }
+    // .prf{
+    //   width: 62vw !important;
+    //   grid-column: 1 / span 1 !important;
+    // }
+  }

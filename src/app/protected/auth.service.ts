@@ -106,6 +106,8 @@ export class AuthService implements OnInit, OnDestroy {
   }
   async signOut() {
     localStorage.removeItem('is');
+    localStorage.removeItem('username');
+    localStorage.removeItem('returnUrl');
     const asd=await import("./FirebaseActions");
     return await asd.signOut(this.auth);
   }
