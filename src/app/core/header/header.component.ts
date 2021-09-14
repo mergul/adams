@@ -15,10 +15,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   _isLogged!: boolean;
 
   constructor(private userService: UserService, private router: Router) {
-    this.logoutChange= this.userService.logoutEmitter;
+    this.logoutChange = this.userService.logoutEmitter;
     this.userService.changeEmitter.subscribe(re => {
-        this._isLogged = re.isIn;
-        this.name = re.name;
+      this._isLogged = re.isIn;
+      this.name = re.name;
     });
     const fgh = localStorage.getItem('username');
     if (fgh) {
@@ -44,15 +44,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   set isLogged(value: boolean) {
     this._isLogged = value;
   }
-  
+
   ngOnInit() {
     this.query = window.matchMedia("(max-width: 800px)");
   }
   signOut() {
-   this._isLogged=false;
-   this.logoutChange.emit(false);
+    this._isLogged = false;
+    this.logoutChange.emit(false);
     this.name = '';
-    if (this.router.url.startsWith('secure'))
+    if (this.router.url.startsWith('/secure'))
       this.router.navigate(['/home']);
   }
 }

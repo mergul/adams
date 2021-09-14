@@ -2,7 +2,7 @@
     width: 100%;
   }
   main{
-    padding: 40px 20px;
+    padding: 20px;
   }
   .micon{
     height: calc(260*(100vw/1503)) !important;
@@ -13,7 +13,7 @@
     height: calc(320*(100vw/1503));
     // top: 10px;
     padding: 0 0 0 0.2rem;
-    margin-bottom: 4rem;
+    margin: 2rem 0 4rem;
   }
   .carousel {
     position: relative;
@@ -103,7 +103,7 @@
     position: relative;
     border: 1px solid khaki;
     background-color: #f6f6f68c;
-    padding: 1.75rem 0.5rem 1rem;
+    padding: .75rem 0.5rem 1rem;
     margin-bottom: 1rem;
     display: grid;
     gap: .5rem;
@@ -113,7 +113,7 @@
     }
     section.prf{
       padding-left: .5rem;
-      height: calc(300*(100vw/1503));
+     // height: calc(300*(100vw/1503));
     }
   }
   // article.article-top{
@@ -192,13 +192,16 @@
     margin: 0 auto;
   //  grid-area: h;
     padding: 10px;
-   font-size: calc(26*(100vw / 1600)) !important;
+   font-size: calc(6px + 20*(100vw / 1600)) !important;
   }
   .article-prf{
     margin: .5rem auto;
    // grid-area: p;
-    font-size: calc(22*(100vw / 1600)) !important;
+    font-size: calc(6px + 16*(100vw / 1600)) !important;
     text-align: center;
+    button{
+      height: calc(18px + 30*(100vw / 1500)) !important;
+    }
   }
   @media screen and (max-width: 800px) {
     .carousel__slide {
@@ -236,13 +239,19 @@
       }
     }
     .article-title{
-      font-size: calc(52*(100vw / 1600)) !important;
+      font-size: calc(6px + 30*(100vw / 1600)) !important;
     }
     .article-prf{
-      font-size: calc(44*(100vw / 1600)) !important;
+      font-size: calc(6px + 26*(100vw / 1600)) !important;
+      button{
+        height: calc(18px + 50*(100vw / 1500)) !important;
+      }
     }
-    .article-top, .article-mi{
-      grid-template-rows: 1fr 1fr;
+    .article-top{
+      grid-template-rows: 1fr auto;
+    }
+    .article-mi{
+      grid-template-rows: auto 1fr;
     }
   }
   article.recommend{

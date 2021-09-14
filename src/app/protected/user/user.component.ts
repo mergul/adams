@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd),
       map((event: any) =>{
         this.masterBreadcrumbList = event.url.split('/');
-        this.masterBreadcrumbList = this.masterBreadcrumbList.slice(2, this.masterBreadcrumbList.length);
+        this.masterBreadcrumbList = this.masterBreadcrumbList.slice(1);
     })).subscribe();
   }
 

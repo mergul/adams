@@ -2,7 +2,7 @@ import { Injectable, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { EMPTY, from, Observable, of, Subject, Subscription } from 'rxjs';
+import { EMPTY, from, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from '../core/user.service';
 
@@ -44,7 +44,7 @@ export class AuthService implements OnInit, OnDestroy {
     await this.signOut();
   })
   }
-  get isLoggedIn(): Subject<{isIn: boolean, name: string}> {
+  get isLoggedIn(): ReplaySubject<{isIn: boolean, name: string}> {
     return this.userService.changeEmitter;
   }
   

@@ -55,7 +55,7 @@
     <div class="carousel" id="car_on">
       <ul class="carousel__viewport" #carousel id="car_one">
         <li *ngFor="let it of list; let i=index;" class="carousel__slide" id="image-{{i+1}}" >
-        <figure class="figure-carousel" (click)="go()" >
+        <figure class="figure-carousel" routerLink="/details" >
           <img class="gallery__img" [src]="it" width="480px" height="363px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
@@ -84,7 +84,7 @@
     <div class="carousel" id="car_tw">
       <ul class="carousel__viewport" #micarousel  id="car_two">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="myimage-{{i+1}}" >
-        <figure class="mifig figure-carousel">
+        <figure class="mifig figure-carousel" routerLink="/details">
           <img class="gallery__img" [src]="it" width="236px" height="133px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
@@ -99,7 +99,7 @@
     <div class="carousel" id="car_th">
       <ul class="carousel__viewport"  id="car_thr">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="yimage-{{i+1}}">
-          <figure class="mifig figure-carousel">
+          <figure class="mifig figure-carousel" routerLink="/details">
           <img class="gallery__img" [src]="it" width="236px" height="133px" alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
@@ -114,7 +114,7 @@
     <div class="carousel" id="car_fo">
       <ul class="carousel__viewport"  id="car_fou">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="mimage-{{i+1}}">
-          <figure class="mifig figure-carousel">
+          <figure class="mifig figure-carousel" routerLink="/details">
           <img class="gallery__img" [src]="it" width="236px" height="133px"  alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>
@@ -129,7 +129,7 @@
     <div class="carousel" id="car_fi">
       <ul class="carousel__viewport"  id="car_fif">
         <li *ngFor="let it of list; let i=index;" class="my__carousel__slide" id="ymimage-{{i+1}}">
-          <figure class="mifig figure-carousel">
+          <figure class="mifig figure-carousel" routerLink="/details">
           <img class="gallery__img" [src]="it" width="236px" height="133px"  alt="Yosemite{{i+1}}" />
           <figcaption>Yosemite{{i+1}}</figcaption>
         </figure>

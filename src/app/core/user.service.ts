@@ -6,7 +6,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 })
 export class UserService {
   logoutEmitter = new EventEmitter<boolean>();
-  changeEmitter = new ReplaySubject<{isIn: boolean, name: string}>();
+  changeEmitter = new ReplaySubject<{isIn: boolean, name: string}>(1);
 
   constructor() { }
 }
