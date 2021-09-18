@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { LazyLoadScriptService } from './lazy-load-script.service';
 
@@ -10,7 +11,7 @@ import { LazyLoadScriptService } from './lazy-load-script.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit, OnDestroy {
-  scriptSubscription!: Subscription;
+  private readonly destroy = new Subject<void>();
   constructor(private renderer: Renderer2, private scriptService: LazyLoadScriptService,
     @Inject(DOCUMENT) private _document: Document, private authService: AuthService){
     this.scriptService.renderer=renderer;
@@ -18,12 +19,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.scriptService.loadScripts([{'name': 'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css', 'type': 'link'},{'name': 'node_modules/apexcharts/dist/apexcharts.min.js', 'type':  'js'}]).map(res=>{
-      this.scriptSubscription =  res.subscribe(data=>{
+      res.pipe(takeUntil(this.destroy)).subscribe(data=>{
         console.log(data);
       });
     })
   }
   ngOnDestroy(): void {
-    this.scriptSubscription.unsubscribe();
+    this.destroy.next();
+    this.destroy.complete();
   }
 }

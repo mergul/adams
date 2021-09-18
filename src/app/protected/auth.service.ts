@@ -2,17 +2,16 @@ import { Injectable, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { EMPTY, from, Observable, of, ReplaySubject, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { EMPTY, from, Observable, of, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { UserService } from '../core/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements OnInit, OnDestroy {
-  private readonly userDisposable: Subscription|undefined;
+  private readonly destroy = new Subject();
   public readonly user: Observable<User | null> = EMPTY;
-  private readonly logoutDisposable: Subscription|undefined;
   token!: Observable<string>;
   userData: any;
   isMobile!: boolean;
@@ -23,7 +22,7 @@ export class AuthService implements OnInit, OnDestroy {
     this.isMobile=window.innerWidth<600;
     if (auth) {
       this.user = authState(this.auth);
-      this.userDisposable = authState(this.auth).pipe(
+      authState(this.auth).pipe(takeUntil(this.destroy),
       traceUntilFirst('auth'),
       switchMap(user => {
         if (user) {
@@ -40,7 +39,7 @@ export class AuthService implements OnInit, OnDestroy {
       console.log(token);
     });
   }
-  this.logoutDisposable = this.userService.logoutEmitter.subscribe(async ss=>{
+  this.userService.logoutEmitter.pipe(takeUntil(this.destroy)).subscribe(async ss=>{
     await this.signOut();
   })
   }
@@ -116,13 +115,9 @@ export class AuthService implements OnInit, OnDestroy {
     return await asd.getRedirectResult(this.auth);
   }
   ngOnInit(): void { }
-
+  
   ngOnDestroy(): void {
-    if (this.userDisposable) {
-      this.userDisposable.unsubscribe();
-    }
-    if (this.logoutDisposable) {
-      this.logoutDisposable.unsubscribe();
-    }
+    this.destroy.next();
+    this.destroy.complete();
   }
 }

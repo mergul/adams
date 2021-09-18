@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
-// import { TokenInterceptor } from './core/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,14 +16,7 @@ import { environment } from 'src/environments/environment';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     CoreModule
   ],
-  providers: [
-    //{ provide: USE_AUTH_EMULATOR, useValue: ['http://localhost', 9099] },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    //   multi: true
-    // }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

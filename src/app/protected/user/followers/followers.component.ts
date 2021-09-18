@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FollowersComponent implements OnInit {
   link!: string;
-
+  tags = ['1', '2', '3'];
   constructor() { }
 
   ngOnInit(): void {

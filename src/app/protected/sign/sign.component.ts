@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { LoaderService } from 'src/app/core/loader.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './sign.component.html',
   styleUrls: ['./sign.component.scss']
 })
-export class SignComponent implements OnInit {
+export class SignComponent implements OnInit, OnDestroy {
   viewMode = 'signup';
   private readonly destroy = new Subject<void>();
   loginForm!: FormGroup;
@@ -16,29 +17,16 @@ export class SignComponent implements OnInit {
   error: { name: string, message: string } = { name: '', message: '' };
   email = '';
   resetPassword = false;
+  _isLoading!: Observable<boolean>;
   listenerFn!: () => void;
   EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
   isValidMailFormat = of(false);
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    // this.afAuth.getRedirectResult().then(function (result) {
-    //   if (result.credential) {
-    //     const fg=JSON.parse(JSON.stringify(result.credential));
-    //     console.log('credential --> ' + JSON.stringify(fg['idToken']));
-    //     // The signed-in user info.
-    //   const user = result.user;
-    //   router.navigate(['details']);
-    //   }
-    // }).catch(function (error) {
-    //   const errorCode = error.code;
-    //   if (errorCode === 'auth/account-exists-with-different-credential') {
-    //     alert('You have already signed up with a different auth provider for that email.');
-    //     // If you are using multiple auth providers on your app you should handle linking
-    //     // the user's accounts here.
-    //   } else {
-    //     console.error(error);
-    //   }
-    // });
+  constructor(private authService: AuthService, private fb: FormBuilder, private ui: LoaderService) {
     this.createForm();
+  }
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
   ngOnInit(): void {
@@ -52,6 +40,7 @@ export class SignComponent implements OnInit {
     });
   }
   async triedGoogleLogin() {
+    this.ui.show();
     await this.authService.loginToGoogle();
   }
   sendResetEmail() {

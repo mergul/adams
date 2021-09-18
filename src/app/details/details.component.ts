@@ -13,8 +13,7 @@ export class DetailsComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this._videoUrl = 
-    this.sanitizer.bypassSecurityTrustUrl(this._videoStringUrl);
+    this._videoUrl = this.sanitizer.bypassSecurityTrustUrl(this._videoStringUrl);
   }
 
 }

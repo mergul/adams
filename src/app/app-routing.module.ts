@@ -1,14 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// const routerOptions: ExtraOptions = {
-  // useHash: true,
-  // anchorScrolling: 'enabled',
- // onSameUrlNavigation: 'reload',
-  // scrollPositionRestoration: 'enabled',
- // enableTracing: true,
- // scrollOffset: [0, 64]
-// };
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', loadChildren: () =>

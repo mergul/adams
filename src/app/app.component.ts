@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { of, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { LoaderService } from './core/loader.service';
 import { NewsService } from './core/news.service';
 import { ReactiveStreamsService } from './core/reactive-streams.service';
 import { WindowRef } from './core/window.service';
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private newslistUrl: string;
   _loggedinUser = false;
 
-  constructor(private reactiveService: ReactiveStreamsService,
+  constructor(private reactiveService: ReactiveStreamsService, public ui: LoaderService,
     public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
     if (!this.reactiveService.random) {
       this.reactiveService.random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
@@ -33,8 +34,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.destroy.next();
     this.destroy.complete();
   }
-
   ngAfterViewInit(): void {
+    this.ui.isLoading.pipe(takeUntil(this.destroy), map(value=>{    
+      this.zone.runOutsideAngular(() =>{
+        const el = this.winRef.nativeWindow.document.getElementById('spinner');
+        el.style.display = value?'block':'none';
+        document.body.style.backgroundColor=value?'#00000099':'transparent';
+      }) 
+    })).subscribe();
     this.zone.run(() => {
       this.winRef.nativeWindow.onload = () => {
         if (!this.reactiveService.statusOfNewsSource()) {

@@ -1,1 +1,4 @@
-<p>{{link=='0'?'izlenen kişiler works!!':(link=='1'?'izlenen konular works!!':'takipçiler works!!')}}</p>
+<app-profile-card *ngIf="link!='1'"></app-profile-card>
+<div *ngIf="link=='1'" class="tags">
+    <button *ngFor="let tag of tags" class="butto ripple button-outline">takip edilen etiket{{tag}}</button>
+</div>

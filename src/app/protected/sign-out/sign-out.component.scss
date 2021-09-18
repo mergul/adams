@@ -1,0 +1,20 @@
+:host{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: darkgray;
+}
+.modal-window {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.85);
+    width: 30vw;
+    max-width: 100%;
+    height: 25vh;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    text-align: center;
+    padding: 1rem;
+}

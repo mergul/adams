@@ -1,0 +1,20 @@
+section.top{
+    position: relative;
+    display: grid;
+    place-items: stretch;
+    padding-top: 10px;
+    figure.figure{
+      position: relative;
+      height: calc(192*(100vw / 1536));
+      margin-left: 1rem;
+      .image-profile{
+        height: calc(192*(100vw / 1536));
+        width: calc(192*(100vw / 1536));
+        object-fit: contain;
+        border-radius: 50%;
+      }
+      figcaption{
+        transform: translate(calc(20*(100vw / 1536)), calc(70*(100vw / 1536)));
+      }     
+    }  
+  }

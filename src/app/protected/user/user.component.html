@@ -1,16 +1,20 @@
 <main>
   <section class="top">
-    <img align="left" class="image-bg" src="assets/back-img.jpeg" alt="asel" />
-    <img align="left" class="image-profile" src="assets/profile-img.jpeg" alt="asel" />
+    <figure class="figure">
+      <img align="center" class="image-bg" src="assets/back-img.jpeg" width="1351px" height="225px" alt="asel" />
+      <img align="left" class="image-profile" src="assets/profile-img.jpeg" width="192px" height="192px" alt="asel" />
+    </figure>
   </section>
   <section class="paths">
-    <ol><li *ngFor="let item of masterBreadcrumbList">
-       <a [routerLink]="item"> --> {{item}}</a>
-    </li></ol>
+    <ol>
+      <li *ngFor="let item of masterBreadcrumbList">
+        <a [routerLink]="item"> --> {{item}}</a>
+      </li>
+    </ol>
   </section>
-  <section class="side"  (click)="viewMode =false">
+  <section class="side" (click)="viewMode =false">
     <article class="resume">
-      <h4>Özgeçmiş</h4>
+      <h1>Özgeçmiş</h1>
       <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
     </article>
     <button routerLink="contents" [class.active]="viewMode">içerikler</button>
@@ -20,6 +24,6 @@
     <button routerLink="user-edit">güncelle</button>
   </section>
   <section class="center">
-   <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </section>
 </main>

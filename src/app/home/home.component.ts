@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { WindowRef } from '../core/window.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,23 +10,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   list = ['assets/medium-bae.jpeg', 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg'
   , 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg',
   'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg', 'assets/medium-bae.jpeg'
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/kenan-sulayman-FV3M7igu8Fs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/anastasia-dulgier-NCFTGtjY3EQ-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/arnaud-mariat-IPXcUYHeErc-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/jakob-owens-EkxOtUljwhs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/tim-bogdanov-4uojMEdcwI8-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/kenan-sulayman-FV3M7igu8Fs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/anastasia-dulgier-NCFTGtjY3EQ-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/arnaud-mariat-IPXcUYHeErc-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/jakob-owens-EkxOtUljwhs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/tim-bogdanov-4uojMEdcwI8-unsplash.jpg'
   ];
   length = this.list.length;
   query !: any;
    @ViewChild('carousel', { read: ElementRef, static: false }) carousel!: ElementRef;
    @ViewChild('micarousel', { read: ElementRef, static: false }) micarousel!: ElementRef;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private winRef: WindowRef) {
   }
   myFrag!: HTMLElement | null;
   lastRoutePath?: string;
@@ -53,8 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const el = document.getElementById(name + mindex);
     if (el) {
       const me=el.parentElement as HTMLElement;
-      me.style.overflowX = 'hidden';
+      if(!!!this.winRef.nativeWindow.chrome&&name.startsWith('i')) me.style.overflowX = 'hidden';
       el.scrollIntoView({ block: "nearest", inline: "nearest" });
+      if(!!!this.winRef.nativeWindow.chrome&&name.startsWith('i'))
       setTimeout(() => {
         me.style.overflowX = 'scroll';
       }, 1000);

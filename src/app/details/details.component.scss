@@ -55,7 +55,7 @@ main{
     width: 100%;
     background-color: #f4f4f4;
     font-size: calc(10px + (26 - 16) * ((100vw - 300px) / (1600 - 300))) !important;
-    h4{
+    h2{
       padding: 0.4rem 1rem 1rem;
       text-transform: uppercase;
       border-top: 1px solid;
@@ -86,7 +86,7 @@ img {
   place-items: center; 
 }
 .part{
-  color: red;
+  color: #be0a0a;
 }
 .speaker a{
     display: grid;
@@ -241,7 +241,7 @@ img {
     p{
       margin-left: 0;
     }
-    h5{
+    h1{
       color: red;
       text-transform: uppercase;
     }

@@ -1,5 +1,6 @@
-<app-header (logChange)="receiveMessage($event)"></app-header>
+<app-header (logoutChange)="receiveMessage($event)"></app-header>
 <div class="content">
+    <div id="spinner" class="loadingspinner"></div>
     <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

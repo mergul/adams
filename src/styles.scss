@@ -1,22 +1,3 @@
-// :host{
-//     display: grid;
-//     grid-template:
-//       "header" auto
-//       "content" minmax(80vh, 1fr)
-//       "footer" auto / 1fr;
-//   }
-//   app-header {
-//     grid-area: header;
-//   }
-//   [content] {
-//     grid-area: content;
-//   }
-//   router-outlet + * {
-//     grid-area: content;
-//   }
-//   app-footer {
-//     grid-area: footer;
-//   }
 body{
     font-size: calc(13px + (26 - 15) * ((100vw - 300px) / (1600 - 300))) !important;
     margin: 0;

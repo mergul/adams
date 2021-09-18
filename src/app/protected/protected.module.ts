@@ -18,6 +18,10 @@ const routes: Routes = [
       import('./sign/sign.module').then(m => m.SignModule)
   },
   {
+    path: 'signout', loadChildren: () =>
+      import('./sign-out/sign-out.module').then(m => m.SignOutModule)
+  },
+  {
     path: 'auth', loadChildren: () =>
       import('./user-management/user-management.module').then(m => m.UserManagementModule)
   },
