@@ -49,4 +49,4 @@ const routes: Routes = [
   providers: [AuthService],
   exports: [RouterModule]
 })
-export class ProtectedModule { }
+export class SecureModule { }

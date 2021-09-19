@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
-import { TokenInterceptor } from '../protected/user/token.interceptor';
+import { TokenInterceptor } from '../secure/user/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const routes: Routes = [

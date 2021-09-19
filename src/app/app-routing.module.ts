@@ -7,7 +7,7 @@ const routes: Routes = [
       import('./home/home.module').then(m => m.HomeModule)},
   {path: 'details', loadChildren: () =>
       import('./details/details.module').then(m => m.DetailsModule)},
-  {path: 'secure', loadChildren: () => import('./protected/protected.module').then(s => s.ProtectedModule)},
+  {path: 'secure', loadChildren: () => import('./secure/secure.module').then(s => s.SecureModule)},
 ];
 
 @NgModule({
