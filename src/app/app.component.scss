@@ -1,7 +1,7 @@
 :host{
     display: grid;
     grid-template:
-      "header" minmax(4rem, max-content)
+      "header" auto
       "content" minmax(100vh, 1fr)
       "footer" max-content / 1fr;
   }

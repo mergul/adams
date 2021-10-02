@@ -185,8 +185,9 @@ img {
    // aspect-ratio: 1/7;
     object-fit: cover;
     width: 100%;
+    margin-top: 1rem;
     display: grid;
-    gap: .5rem;
+    gap: 1.5rem;
     grid-template: "moin1" auto
     "moin2" auto
     "moin3" auto

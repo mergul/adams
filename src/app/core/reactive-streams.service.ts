@@ -38,7 +38,7 @@ export class ReactiveStreamsService {
         headers = headers.append('accept', 'text/event-stream')
             .append('X-Custom-Header', 'last-event-id');
 
-        this.newsEventSource = new EventSourcePolyfill(url, { headers: headers, withCredentials: true, heartbeatTimeout: 120000 });
+        this.newsEventSource = new EventSourcePolyfill(url, { headers: headers, withCredentials: true, heartbeatTimeout: 60000 });
         this.newsEventSource.addEventListener('top-news-' + processName, event => {
             const topNews = JSON.parse(event.data);
             const list = this.newsBehaviorSubject.getValue();

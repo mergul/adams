@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TokenInterceptor } from '../secure/user/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PostsListModule } from '../posts-list/posts-list.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -12,7 +13,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [HomeComponent],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, RouterModule.forChild(routes), PostsListModule
   ],
   providers: [
     {
@@ -21,7 +22,7 @@ const routes: Routes = [
       multi: true
     }
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, PostsListModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule {

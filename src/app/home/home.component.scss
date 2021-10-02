@@ -11,114 +11,24 @@
   .container{
     position: relative;
     height: calc(320*(100vw/1503));
-    // top: 10px;
     padding: 0 0 0 0;
     margin: 2rem 0 4rem;
-  }
-  .carousel {
-    position: relative;
-    margin: 0;
-    padding: 0;
-  }
-  .carousel__viewport {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    overflow-y: hidden;
-  }
-  
-  .carousel__slide {
-    scroll-snap-align: start;
-    position: relative;
-    flex: 1 0 33%;
-    margin: 0 0.22rem 0 0;
-    justify-content: center;
-    object-fit: cover;
-    padding: 0;
-  }
-  .my__carousel__slide{
-    scroll-snap-align: start;
-    position: relative;
-    flex: 1 0 16.5%;
-    margin: 0 0.12rem 0 0;
-    justify-content: center;
-    object-fit: cover;
-    padding: 0;
-  }
-  .carousel::before,
-  .carousel::after,
-  .carousel__prev,
-  .carousel__next {
-    position: absolute;
-    width: calc(48*(100vw / 1536));
-    height: calc(48*(100vw / 1536));
-    border-radius: 50%;
-    font-size: 0;
-    outline: 0;
-  }
-  .carousel::before {
-    content: '<';
-  }
-  .carousel::after {
-    content: '>';
-  }
-  .carousel__prev, .carousel__next {
-    cursor: grabbing;
-    top: 55%;
-    transform: translateY(-55%);
-  }
-  .carousel__next, .carousel::after {
-    right: calc(16*(100vw / 1536));
-  }
-  .carousel__prev, .carousel::before {
-    left: calc(16*(100vw / 1536));
-  }
-  
-  .carousel::before,
-  .carousel::after {
-    z-index: 1;
-    background-color: #333;
-    background-size: calc(48*(100vw / 1536)) calc(48*(100vw / 1536));
-    background-repeat: no-repeat;
-    background-position: center center;
-    color: #fff;
-    font-size: calc(24*(100vw / 1536));
-    line-height: calc(48*(100vw / 1536));
-    text-align: center;
-    pointer-events: none;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: bold;
   }
   h2{
     margin: 2px;
   }
   article.article-top, article.article-mi{
     position: relative;
-    border: 1px solid khaki;
     background-color: #f6f6f68c;
-    padding: .75rem 0.5rem 1rem;
+    padding: 1rem 0;
     margin-bottom: 1rem;
     display: grid;
-    gap: .5rem;
-    grid-template-columns: repeat(auto-fit, minmax(360px, auto));
-    section.fi{
-      margin: auto;
-    }
-    section.prf{
-      padding-left: .5rem;
-    }
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
   }
  .figure {
     position: relative;
     grid-area: fig;
-    border: thin #c0c0c0 solid;
-    padding: 4px;
-    margin: auto;
     img {
       height: calc(300*(100vw/1503));
       max-width: 100%;
@@ -131,34 +41,6 @@
       width: calc(100% - 8px);
     }
   }
-  .figure-carousel {
-    position: relative;
-    height: calc(260*(100vw/1503));
-    margin: 0 .25rem;
-    img {
-      max-width: 100%;
-      object-fit: cover;
-      height: calc(260*(100vw/1503));
-    }
-    figcaption{
-      background: rgba(0, 9, 0, 0.4);
-      color: #fff;
-      bottom: 0;
-      width: 100%;
-    }
-  }
-  .mifig{
-    height: calc(200*(100vw/1503)) !important;
-    figcaption{
-      background: rgb(235, 238, 235) !important;
-      color: #000 !important;
-      bottom: 5px !important;
-      width: 100%;
-    }
-    img{
-      height: calc(150*(100vw/1503)) !important;
-    }
-  }
   figcaption {
     position: absolute;
     padding: 4px;
@@ -166,74 +48,15 @@
     height: 25%;
   }
   .article-title{
-    margin: 0 auto;
-  //  grid-area: h;
-    padding: 10px;
-   font-size: calc(6px + 20*(100vw / 1600)) !important;
+    text-align: center;
+    font-size: calc(6px + 20*(100vw / 1600)) !important;
   }
   .article-prf{
     margin: .5rem auto;
-   // grid-area: p;
     font-size: calc(6px + 16*(100vw / 1600)) !important;
     text-align: center;
     button{
       height: calc(18px + 30*(100vw / 1500)) !important;
-    }
-  }
-  @media screen and (max-width: 800px) {
-    .carousel__slide {
-      flex: 1 0 49.5%
-    }
-    .my__carousel__slide {
-      flex: 1 0 33%
-    }
-    .carousel__prev,
-    .carousel__next, 
-    .carousel::before,
-   .carousel::after {
-      width: calc(64*(100vw / 1536));
-      height: calc(64*(100vw / 1536));
-      line-height: calc(64*(100vw / 1536)) !important;
-    }
-    .carousel::before,
-    .carousel::after{
-      background-size: calc(64*(100vw / 1536)) calc(64*(100vw / 1536)) !important;
-      font-size: calc(40*(100vw / 1536)) !important;
-    }
-    .figure-carousel {
-      height: calc(340*(100vw/1503)) !important;
-      img{
-        height: calc(340*(100vw/1503)) !important;
-      }
-    }
-    .mifig{
-      height: calc(310*(100vw/1503)) !important;
-      img{
-        height: calc(230*(100vw/1503)) !important;
-      }
-    }
-    .container{
-      height: calc(420*(100vw/1503)) !important;
-    }
-    .figure{
-      img {
-        height: calc(600*(100vw/1503));
-      }
-    }
-    .article-title{
-      font-size: calc(6px + 30*(100vw / 1600)) !important;
-    }
-    .article-prf{
-      font-size: calc(6px + 26*(100vw / 1600)) !important;
-      button{
-        height: calc(18px + 50*(100vw / 1500)) !important;
-      }
-    }
-    .article-top{
-      grid-template-rows: 1fr auto;
-    }
-    .article-mi{
-      grid-template-rows: auto 1fr;
     }
   }
   article.recommend{
@@ -270,5 +93,32 @@
       text-align: center;
       margin: 1rem;
       font-size: calc(.75rem + 10*(100vw/1500)) !important; 
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .container{
+      height: calc(420*(100vw/1503)) !important;
+    }
+    .figure{
+      img {
+        height: calc(600*(100vw/1503));
+      }
+    }
+    .article-title{
+      font-size: calc(6px + 30*(100vw / 1600)) !important;
+    }
+    .article-prf{
+      font-size: calc(6px + 26*(100vw / 1600)) !important;
+      button{
+        height: calc(18px + 50*(100vw / 1500)) !important;
+      }
+    }
+    .article-top{
+      grid-template-columns: 1fr !important;
+      grid-template-rows: 1fr auto;
+    }
+    .article-mi{
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto 1fr;
     }
   }
