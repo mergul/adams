@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { NewsPayload } from '../core/news.model';
 import { NewsService } from '../core/news.service';
+import { Point } from '../core/Point';
 import { WindowRef } from '../core/window.service';
 
 @Component({
@@ -50,9 +51,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
         this.go();
       }
       mindex = (index + msize) > this.length ? this.length : (index + msize);
-      // setTimeout(() => {
-      //   this.percentage=mindex;
-      // }, 750);
     } else {
       if (ev.pageX > window.innerWidth * (1 / (msize + 1))) {
         this.go();
@@ -120,7 +118,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
           this.unsubscriber$.next(true);
           this.unsubscriber$.unsubscribe();
           this.currentPage = 1;
-        //  this.postsBehaviorSubject.getValue().push(...x.slice(10, x.length));
           this.postsBehaviorSubject.next(x);
           console.log('stopped to listen --> ' + this.prevOffset);
         } else {
@@ -138,9 +135,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     }
     return item.newsId;
   }
-  track(event:any){
-    setTimeout(() => {
+  track(event: Point){
       this.percentage=Math.round(event.x);
-    }, 750);
   }
 }

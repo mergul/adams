@@ -13,9 +13,14 @@ export class ScrollDirective {
     destroy = new Subject();
     destroy$ = this.destroy.asObservable();
    
-    constructor(private element: ElementRef<HTMLElement>, private zone: NgZone, private winRef: WindowRef) {
-        const scrollElement: HTMLElement = this.element.nativeElement.tagName==='MAIN'?this.winRef.nativeWindow:this.element.nativeElement;
-        this.scrollObs(scrollElement).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    constructor(private element: ElementRef<HTMLElement>, private zone: NgZone, private winRef: WindowRef) {  
+        let scrollElement: HTMLElement = this.element.nativeElement;
+        let matime=100;
+        if ( this.element.nativeElement.tagName==='MAIN') {
+            scrollElement = this.winRef.nativeWindow;
+            matime = 15;
+        }
+        this.scrollObs(scrollElement, matime).pipe(takeUntil(this.destroy$)).subscribe(() => {
             const px=scrollElement.scrollLeft||this.winRef.nativeWindow.scrollX;
             const py=scrollElement.scrollTop||this.winRef.nativeWindow.scrollY;
             if (this.pointValue.x !== px||this.pointValue.y !== py) {
@@ -25,10 +30,10 @@ export class ScrollDirective {
         });
     }
 
-    scrollObs = (elem) => this.zone.runOutsideAngular(() => fromEvent(elem, 'scroll', {
+    scrollObs = (elem, matime) => this.zone.runOutsideAngular(() => fromEvent(elem, 'scroll', {
         passive: true
     }).pipe(//tap(() => this.isScroll = true),
-        debounceTime(15), distinctUntilChanged()));
+        debounceTime(matime), distinctUntilChanged()));
     
     ngOnDestroy(){
         this.destroy.next();
