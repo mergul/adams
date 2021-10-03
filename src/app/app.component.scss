@@ -40,4 +40,6 @@
         transform: rotate(360deg)
     }
   }
-  
+  .blurred {
+    filter: blur(1px) brightness(75%);
+  }

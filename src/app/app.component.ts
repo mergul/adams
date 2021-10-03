@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.zone.runOutsideAngular(() =>{
         const el = this.winRef.nativeWindow.document.getElementById('spinner');
         el.style.display = value?'block':'none';
-        document.body.style.backgroundColor=value?'#00000099':'transparent';
+        value?el.nextSibling.classList.add('blurred'):el.nextSibling.classList.remove('blurred');
       }) 
     })).subscribe();
     this.zone.run(() => {
