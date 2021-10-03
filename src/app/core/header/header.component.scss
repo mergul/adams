@@ -2,7 +2,7 @@
   display: grid;
   grid-template-rows: minmax(auto, calc(3rem + 16 * ((100vw - 300px) / (1536 - 300))));
 }
-*, *::before, *::after {
+*::before, *::after {
   box-sizing: border-box;
 }
 header {
@@ -88,7 +88,6 @@ nav ul {
 nav a, nav button {
   color: white;
   text-decoration: none;
- // font-size: calc(6px + (16 - 6) * ((100vw - 800px) / (1600 - 800)));
   text-transform: uppercase;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
@@ -210,7 +209,6 @@ nav a:hover, nav button:hover {
   }
   nav>ul>li> a::before {
     content: '';
-    display: block;
     height: 5px;
     background: black;
     position: absolute;
@@ -227,7 +225,6 @@ nav a:hover, nav button:hover {
 .user{
   display: flex;
   align-items: center;
-  margin: 0 0 0 0;
   img {
     width: 50px;
     border-radius: 50%;

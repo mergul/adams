@@ -1,16 +1,3 @@
-:host{
-    width: 100%;
-    margin: 0;
-}
-*{
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-}
-ul, li {
-  list-style: none;
-}
-
 .top{
   font-weight: 700;
 }
@@ -24,14 +11,12 @@ main{
 }
 .article-top{
     grid-area: a;
-   // aspect-ratio: 2;
     object-fit: cover;
     width: 100%;
     background-color: rgb(226, 226, 240);
 }
 .article-se{
     grid-area: b;
-  //  aspect-ratio: 3/13;
     object-fit: cover;
     width: 100%;
     background-color: rgb(239, 243, 232);
@@ -41,7 +26,6 @@ main{
 }
 .article-th{
     grid-area: c;
- //   aspect-ratio: 12;
     object-fit: cover;
     width: 100%;
     background-color: rgb(233, 243, 233);
@@ -50,7 +34,6 @@ main{
 }
 .article-fo{
     grid-area: d;
- //   aspect-ratio: 2/3;
     object-fit: cover;
     width: 100%;
     background-color: #f4f4f4;
@@ -116,8 +99,8 @@ img {
 
 #tab1{
     display: grid;
-     grid-template: "fo mo" auto / 3fr 1fr;
-     gap: .5em;
+    grid-template: "fo mo" auto / 3fr 1fr;
+    gap: .5em;
 }
 #tab2{
     display: grid;
@@ -168,8 +151,7 @@ img {
     transform: scale(1, 1);
   }
   .tab-fo{
-      grid-area: fo;
-    //  aspect-ratio: 1/2.3;
+    grid-area: fo;
     object-fit: cover;
     width: 100%;
     gap: 1rem;
@@ -182,7 +164,6 @@ img {
   }
   .tab-mo{
     grid-area: mo;
-   // aspect-ratio: 1/7;
     object-fit: cover;
     width: 100%;
     margin-top: 1rem;
@@ -221,14 +202,12 @@ img {
 }
 .tab-la{
     grid-area: la;
-  //  aspect-ratio: 1/10;
     object-fit: cover;
     width: 100%;
     background-color: #fafaf8;
 }
 .tab-ma{
     grid-area: ma;
-  //  aspect-ratio: 1/2.3;
     object-fit: cover;
     width: 100%;
     background-color: rgb(250, 250, 250);
@@ -252,14 +231,12 @@ img {
 }
 .tab-na{
     grid-area: na;
-  //  aspect-ratio: 1/10;
     object-fit: cover;
     width: 100%;
     background-color: #f1f3f3;
 }
 .tab-pa{
     grid-area: pa;
- //   aspect-ratio: 1/2.3;
     object-fit: cover;
     width: 100%;
     background-color: rgb(242, 248, 248);
@@ -316,10 +293,3 @@ figure{
     "b" auto / 1fr;
     }
   }
-  // @supports(display: subgrid){
-  //   .tab-fo{
-  //     display: subgrid;
-  //     grid-template-rows: auto 1fr auto auto;
-  //     grid-auto-flow: row;
-  //   }
-  // }

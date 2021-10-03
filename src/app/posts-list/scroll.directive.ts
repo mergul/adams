@@ -15,7 +15,7 @@ export class ScrollDirective {
    
     constructor(private element: ElementRef<HTMLElement>, private zone: NgZone, private winRef: WindowRef) {  
         let scrollElement: HTMLElement = this.element.nativeElement;
-        let matime=100;
+        let matime=150;
         if ( this.element.nativeElement.tagName==='MAIN') {
             scrollElement = this.winRef.nativeWindow;
             matime = 15;

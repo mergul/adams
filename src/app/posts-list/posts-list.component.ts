@@ -136,6 +136,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
     return item.newsId;
   }
   track(event: Point){
+    setTimeout(() => {
       this.percentage=Math.round(event.x);
+    }, 750);
   }
 }
