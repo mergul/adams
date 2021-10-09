@@ -16,15 +16,15 @@ header {
 .logo {
   display: inherit;
   justify-content: unset;
+  text-decoration: none; 
   background-repeat: no-repeat;
   background-image:url('data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cGF0aCBkPSJNMjUsN2wyOCwzNmw0MC0xOGwtMzYsMjVsMTksNDRsLTI3LTM3bC00MSwxN2wzNi0yNnoiIGZpbGw9IiNjZmMiLz4KICA8ZWxsaXBzZSBjeD0iNTAiIGN5PSI1MCIgcng9IjMyIiByeT0iMzAiIHN0cm9rZT0iI2ZjMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxMSIvPgogIDxwYXRoIGQ9Ik02MywybC03LDQzbDQyLDE3bC00NS02bC0xNiw0Mmw3LC00NWwtNDItMTZsNDUsNnoiIGZpbGw9IiMzY2MiLz4KPC9zdmc+Cg==');
  .logos{
    justify-content: end;
    color: white;
    display: inherit;
- } 
- a{    
-  text-decoration: none; 
+ }
+ div{    
   place-self: center; 
  }
 }

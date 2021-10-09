@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.query.matches) {
       const el = document.getElementById('nav-toggle');
       if (el) {
-        document.querySelectorAll('nav li a').forEach(item => {
+        document.querySelectorAll('nav li a, nav li button').forEach(item => {
           item.addEventListener('click', () => {
             el.click();
           });
