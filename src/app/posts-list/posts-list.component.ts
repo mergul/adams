@@ -45,7 +45,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     if (this.query.matches) {
       msize = size === 3 ? 2 : 3;
     }
-    console.log("msize--> " + msize + " -index--> " + index + " -pageX --> " + ev.pageX);
+   // console.log("msize--> " + msize + " -index--> " + index + " -pageX --> " + ev.pageX);
     if (forward) {
       if (ev.pageX < window.innerWidth * (msize / (msize + 1))) {
         this.go();
@@ -119,7 +119,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
           this.unsubscriber$.unsubscribe();
           this.currentPage = 1;
           this.postsBehaviorSubject.next(x);
-          console.log('stopped to listen --> ' + this.prevOffset);
+        //  console.log('stopped to listen --> ' + this.prevOffset);
         } else {
           this.postsBehaviorSubject.next(x.slice(0, 10 * this.currentPage));
         }

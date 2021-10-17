@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.scriptService.loadScripts([{'name': 'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css', 'type': 'link'},{'name': 'node_modules/apexcharts/dist/apexcharts.min.js', 'type':  'js'}]).map(res=>{
       res.pipe(takeUntil(this.destroy)).subscribe(data=>{
-        console.log(data);
+       // console.log(data);
       });
     })
   }
