@@ -1,5 +1,5 @@
   main{
-    padding: 20px;
+    padding: 0 1rem;
   }
   .micon{
     height: calc(260*(100vw/1503)) !important;
@@ -8,8 +8,8 @@
   .container{
     position: relative;
     height: calc(320*(100vw/1503));
-    padding: 0 0 0 0;
-    margin: 2rem 0 4rem;
+    padding: 0;
+    margin: 1rem 0;
   }
   h2{
     margin: 2px;
@@ -17,8 +17,8 @@
   article.article-top, article.article-mi{
     position: relative;
     background-color: #f6f6f68c;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
+    padding: 1rem 0 0;
+  //  margin-bottom: 1rem;
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
@@ -56,7 +56,7 @@
     }
   }
   article.recommend{
-    margin: 1rem 0;
+    margin: 1rem 0 0;
     padding: 1.75rem 0.5rem 1rem;
     background-color: #7700b3;
     color: ghostwhite;

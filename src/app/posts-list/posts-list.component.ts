@@ -13,7 +13,6 @@ import { WindowRef } from '../core/window.service';
   styleUrls: ['./posts-list.component.scss'],
 })
 export class PostsListComponent implements OnInit, OnDestroy {
-
   private postsBehaviorSubject = new BehaviorSubject<NewsPayload[]>([]);
   postsList$ = this.postsBehaviorSubject.asObservable();
   private _postsList!: Observable<NewsPayload[]>;
@@ -80,6 +79,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
   get size(): number {
     return this._size;
   }
+  set size(value: number) {
+    this._size = value;
+  }
   @Input()
   get name(): string {
     return this._name;
@@ -87,7 +89,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
   set name(value: string) {
     this._name = value;
   }
-
   set percentage(value: number) {
     this.isUp = value > this._percentage;
     this._percentage = value;
@@ -96,10 +97,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
       this.getStories();
     }
   }
-  set size(value: number) {
-    this._size = value;
-  }
-
   @Input()
   get postsList(): Observable<NewsPayload[]> {
     return this.postsList$;

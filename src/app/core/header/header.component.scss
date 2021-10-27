@@ -101,6 +101,11 @@ nav button{
 nav a:hover, nav button:hover {
   color: #000;
 }
+#gir{
+  display: block;
+  max-width: 6ch;
+  margin-right: 1rem;
+}
 .nav-toggle:checked ~ nav {
   transform: scale(1,1);
 }

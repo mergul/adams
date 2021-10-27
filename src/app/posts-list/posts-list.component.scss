@@ -82,6 +82,7 @@
       max-width: 100%;
       object-fit: cover;
       height: calc(260*(100vw/1503));
+      cursor: grab;
     }
     figcaption{
       position: absolute;
