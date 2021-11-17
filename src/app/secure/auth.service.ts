@@ -2,9 +2,11 @@ import { Injectable, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { EMPTY, from, Observable, of, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { EMPTY, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { UserService } from '../core/user.service';
+import { ReactiveStreamsService } from '../core/reactive-streams.service';
+import { MyUser } from '../core/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,12 @@ export class AuthService implements OnInit, OnDestroy {
   private readonly destroy = new Subject();
   public readonly user: Observable<User | null> = EMPTY;
   token!: Observable<string>;
-  userData: any;
+  userData!: MyUser;
   isMobile!: boolean;
   isRedirected= false;
 
-  constructor(@Optional() private auth: Auth, private router: Router, private ngZone: NgZone, private userService: UserService) {
+  constructor(@Optional() private auth: Auth, private router: Router, private ngZone: NgZone, private userService: UserService
+  , private reactiveService: ReactiveStreamsService) {
    // this.afAuth.useEmulator("http://localhost:9099");
     this.isMobile=window.innerWidth<600;
     if (auth) {
@@ -26,17 +29,28 @@ export class AuthService implements OnInit, OnDestroy {
       traceUntilFirst('auth'),
       switchMap(user => {
         if (user) {
-          this.userService.changeEmitter.next({isIn: true, name: user.displayName!});
+          this.userService.authChangeEmitter.next({isIn: true, name: user.displayName!});
           localStorage.setItem('username', JSON.stringify(user.displayName));
-          return from(user.getIdToken());
+          const id = this.userService.createId(user.uid);
+          this.reactiveService.setListeners('@' + id);
+          return this.userService.getDbUser('/api/rest/start/user/' + '@' + id);
         } else {
-          this.userService.changeEmitter.next({isIn: false, name: ""});
+          this.userService.authChangeEmitter.next({isIn: false, name: ""});
           localStorage.setItem('username', '');
-          return of("");
+          return of(null);
         }
       })
-    ).subscribe((token: string) => {
-      console.log(token);
+    ).subscribe((user) => {
+      if (user) {
+        this.userService.newsCo.set(this.userService.links[1], this.userData.tags.map(value => {
+        this.reactiveService.setUserListListeners('#' + value);
+        return '#' + value;
+      }));
+      this.userService.newsCo.set(this.userService.links[2], this.userData.users.map(value => {
+          this.reactiveService.setUserListListeners('@' + value);
+          return '@' + value;
+      }));
+      }
     });
   }
   this.userService.logoutEmitter.pipe(takeUntil(this.destroy)).subscribe(async ss=>{
@@ -44,7 +58,7 @@ export class AuthService implements OnInit, OnDestroy {
   })
   }
   get isLoggedIn(): ReplaySubject<{isIn: boolean, name: string}> {
-    return this.userService.changeEmitter;
+    return this.userService.authChangeEmitter;
   }
   
   async loginToGoogle() {
@@ -107,6 +121,12 @@ export class AuthService implements OnInit, OnDestroy {
     localStorage.removeItem('is');
     localStorage.removeItem('username');
     localStorage.removeItem('returnUrl');
+    for (const tag of this.userData.tags) {
+      this.reactiveService.resetUserListListeners('#' + tag);
+    }        
+    for (const tag of this.userData.users) {
+      this.reactiveService.resetUserListListeners('@' + tag, true);
+    }
     const asd=await import("./FirebaseActions");
     return await asd.signOut(this.auth);
   }

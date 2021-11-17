@@ -7,6 +7,7 @@ import { FollowersComponent } from './followers/followers.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { AuthGuard } from '../auth.guard';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
+import { DetailsComponent } from '../../details/details.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [AuthGuard],
@@ -14,7 +15,9 @@ const routes: Routes = [
           [
             { path: '', redirectTo: 'contents', pathMatch: 'full'},
             { path: 'user-edit', component: UserEditComponent},
-            { path: 'contents', component: UserContentsComponent},
+            { path: 'contents', component: UserContentsComponent, children: [
+              { path: ':id', component: DetailsComponent}
+            ]},
             { path: 'followers', component: FollowersComponent}, 
             { path: 'followee', component: FollowersComponent},          
             { path: 'followco', component: FollowersComponent}

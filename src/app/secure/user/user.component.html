@@ -1,4 +1,4 @@
-<main>
+<main id="user-profile">
   <section class="top">
     <figure class="figure">
       <img align="center" class="image-bg" src="assets/back-img.jpeg" width="1351px" height="225px" alt="asel" />
@@ -7,8 +7,8 @@
   </section>
   <section class="paths">
     <ol>
-      <li *ngFor="let item of masterBreadcrumbList">
-        <a [routerLink]="item"> --> {{item}}</a>
+      <li *ngFor="let item of this.newaService._masterBreadcrumbList;let i=index;">
+        <a [routerLink]="[i==0?'../../'+item:(i==1?'../'+item:'./'+item)]"> --> {{item}}</a>
       </li>
     </ol>
   </section>

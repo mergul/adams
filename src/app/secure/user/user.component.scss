@@ -1,4 +1,4 @@
-  main{
+  #user-profile{
     width: 100%;
     display: grid;
     grid-template: 
@@ -77,12 +77,15 @@
     }
   }
   @media screen and (max-width: 600px) {
-    main{
+    #user-profile{
     grid-template: "a" auto
     "a" auto
     "d" auto
     "b" auto
     "c" 1fr / 1fr;
     gap: .25rem;
+    }
+    section.paths{
+      padding-left: 5vw;
     }
   }

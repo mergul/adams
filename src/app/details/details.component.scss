@@ -1,7 +1,69 @@
+.modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  //visibility: hidden;
+  //opacity: 0;
+  //pointer-events: none;
+  transition: all 0.3s;
+ // &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+ // }
+  & > div {
+    width: 90%;
+    max-width: 100%;
+    height: 90%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 2em;
+    background: white;
+   // border-radius: 0.5em;
+    .modal-guts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      text-align: center;
+      padding: 30px 5px;
+    }
+  }
+  // h1 {
+  //   font-size: 150%;
+  //   margin: 0 0 15px;
+  // }
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 30px;
+  font-size: 80%;
+  position: absolute;
+  right: .25rem;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  z-index: 1111;
+  &:hover {
+    color: black;
+  }
+}
+
 .top{
   font-weight: 700;
 }
-main{
+#details{
     display: grid;
     grid-template: 
     "a b" auto
@@ -39,11 +101,11 @@ main{
     background-color: #f4f4f4;
     font-size: calc(10px + (26 - 16) * ((100vw - 300px) / (1600 - 300))) !important;
     h2{
-      padding: 0.4rem 1rem 1rem;
+      padding: 0.4rem 0 1rem 1rem;
       text-transform: uppercase;
       border-top: 1px solid;
     }
-    p{line-height: 1.5; margin: 1rem}
+    p{line-height: 1.5; margin: 1rem 0}
 }
 img {
     width: 100%;
@@ -116,6 +178,7 @@ img {
 }
 .tab-slider--tabs {
     display: flex;
+    gap: 1rem;
 }
   .tab-slider--trigger:hover::before {
     transform: scale(1,1);
@@ -137,7 +200,7 @@ img {
   }
   .tab-slider--trigger {
     cursor: pointer;
-    margin: .5rem 1rem;
+    margin: .5rem 0;
     color: rgb(193, 20, 219);
     opacity: 1;
     white-space: nowrap;
@@ -265,9 +328,6 @@ img {
   grid-template-columns: repeat(2, 1fr);
   gap: .5rem;
   margin-bottom: 2rem;
-  img {
-    object-fit: cover;
-  }
 }
 figure{
     position: relative;
@@ -287,11 +347,25 @@ figure{
       text-align: center;
     }
 }
-  @media screen and (max-width: 600px) {
-    main{
+  @media screen and (max-width: 800px) {
+    #details{
     grid-template: "a" auto
     "c" auto
     "d" 9fr
     "b" auto / 1fr;
+    }
+    .modal-window {
+      & > div{
+        width: 100%;
+      }
+    }
+    #tab1{
+      grid-template: "fo" auto "mo" auto / 1fr;
+    }
+    #tab2{
+      grid-template: "la" auto "ma" auto / 1fr;
+    }
+    #tab3{
+      grid-template: "na" auto "pa" auto / 1fr;
     }
   }

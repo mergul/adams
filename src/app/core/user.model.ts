@@ -40,7 +40,7 @@ export class UserTag {
     }
 }
 
-export interface User {
+export interface MyUser {
     blocked: string[];
     iban: string;
     contentsCount: string;

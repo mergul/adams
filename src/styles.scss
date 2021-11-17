@@ -2,6 +2,7 @@ body{
     font-size: calc(13px + (20 - 13) * ((100vw - 300px) / (1600 - 300))) !important;
     margin: 0;
     width: 100%;
+    overflow-x: hidden;
   }
   ul, li {
     list-style: none;

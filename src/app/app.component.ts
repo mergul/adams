@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { LoaderService } from './core/loader.service';
 import { NewsService } from './core/news.service';
 import { ReactiveStreamsService } from './core/reactive-streams.service';
@@ -15,13 +16,25 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly destroy = new Subject<void>();
   private newslistUrl: string;
   _loggedinUser = false;
+  isChildRoutePath=false;
 
-  constructor(private reactiveService: ReactiveStreamsService, public ui: LoaderService,
+  constructor(private reactiveService: ReactiveStreamsService, public ui: LoaderService, private router: Router,
     public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
     if (!this.reactiveService.random) {
       this.reactiveService.random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
     }
     this.newslistUrl = '/sse/chat/room/TopNews' + this.reactiveService.random + '/subscribeMessages';
+    this.router.events.pipe(takeUntil(this.destroy), filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((event: any) => {
+        const ll=event.urlAfterRedirects.split('/').slice(1);
+        const l=Math.min(ll.length-1, this.newsService.getBreadcrumbList().length-1);
+        this.isChildRoutePath = this.newsService.getBreadcrumbList()[l]==ll[l];
+        this.newsService.setBreadcrumbList(event.urlAfterRedirects.split('/').slice(1));
+    })).subscribe(() => {
+      if(!this.isChildRoutePath){
+        window.scrollTo(0, 0);
+      }
+    });
   }
   receiveMessage($event) {
     this._loggedinUser = $event;

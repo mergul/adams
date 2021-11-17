@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import { WindowRef } from './window.service';
 import { UserService } from './user.service';
 import { LoaderService } from './loader.service';
@@ -15,9 +14,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [FooterComponent, HeaderComponent],
   imports: [
-    CommonModule, RouterModule.forChild(routes), HttpClientModule,
+    CommonModule, RouterModule.forChild(routes),
   ],
-  providers: [ WindowRef, UserService, LoaderService, NewsService, ReactiveStreamsService],
+  providers: [ WindowRef, UserService, LoaderService, NewsService, ReactiveStreamsService
+],
   exports: [FooterComponent, HeaderComponent]
 })
 export class CoreModule { }

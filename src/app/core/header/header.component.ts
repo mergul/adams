@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private userService: UserService, private router: Router, private ui: LoaderService) {
     this.logoutChange = this.userService.logoutEmitter;
-    this.userService.changeEmitter.pipe(takeUntil(this.destroy)).subscribe(re => {
+    this.userService.authChangeEmitter.pipe(takeUntil(this.destroy)).subscribe(re => {
       this._isLogged = re.isIn;
       this.name = re.name;
       if (this.ui.isLoading.getValue()) { this.ui.hide(); }

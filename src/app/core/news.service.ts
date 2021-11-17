@@ -31,11 +31,18 @@ export class NewsService {
     list$!: NewsPayload[];
     preList: any[]=[];
     _isConnected = true;
+    _masterBreadcrumbList=['home'];
     preModalUrl!: string;
     endPlayer: Subject<boolean>=new Subject();
     scrollEmitter = new EventEmitter<Observable<boolean>>();
 
     constructor(protected http: HttpClient) {
+    }
+    getBreadcrumbList(): string[] {
+        return this._masterBreadcrumbList;  
+    }
+    setBreadcrumbList(list: string[]) {
+        this._masterBreadcrumbList = list;
     }
     setNewsList(tags: Array<string>, byOwners: boolean) {
         if (byOwners) {

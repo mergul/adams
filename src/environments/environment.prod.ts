@@ -9,3 +9,6 @@ export const environment = {
     messagingSenderId: '608473106039'
   }
 };
+export const globals = {
+  url: 'http://localhost' // '35.204.190.149'
+};

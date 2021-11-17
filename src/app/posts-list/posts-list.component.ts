@@ -25,7 +25,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
   _orderBy = 'count';
 
   myFrag!: HTMLElement | null;
-  lastRoutePath?: string;
   isUp = false;
   currentPage = 0;
   prevOffset = 0;

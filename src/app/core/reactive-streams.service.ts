@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { NewsPayload } from './news.model';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { RecordSSE } from './record.sse';
 import { BalanceRecord } from './user.model';
 
@@ -31,7 +31,7 @@ export class ReactiveStreamsService {
     heListener: any;
     myListener: any;
 
-    constructor(private zone: NgZone, protected http: HttpClient) {
+    constructor(private zone: NgZone) {
     }
     getNewsStream(processName: number, url: string) {
         let headers: HttpHeaders = new HttpHeaders();
@@ -115,8 +115,8 @@ export class ReactiveStreamsService {
             default: return this.newsBehaviorSubject.asObservable();
         }
     }
-    setListeners(id: string, random: number) {
-        this.setFirstListeners(id, random);
+    setListeners(id: string) {
+        this.setFirstListeners(id);
         this.newsEventSource.addEventListener('top-news-' + id, this.meListener, true);
         this.newsEventSource.addEventListener('user-counts-' + id, event => {
             const userCounts = JSON.parse(event.data);
@@ -143,7 +143,7 @@ export class ReactiveStreamsService {
             this.zone.run(() => this.hotUsersBehaviorSubject.next(list));
         });
     }
-    setFirstListeners(id: string, random: number) {
+    setFirstListeners(id: string) {
         const myB=this.topList.get('top-news-' + id);
         if (myB) {
             if (myB.includes('other')) {
@@ -156,9 +156,9 @@ export class ReactiveStreamsService {
             }
         }
         this.topList.set('top-news-' + id, ['me']);
-        this.newsEventSource.addEventListener('top-news-' + id + '-' + random, this.meListener, true);
-        this.newsEventSource.addEventListener('top-news-people-' + id + '-' + random, this.myListener, true);
-        this.newsEventSource.addEventListener('top-news-tags-' + id + '-' + random, this.myListener, true);
+        this.newsEventSource.addEventListener('top-news-' + id + '-' + this.random, this.meListener, true);
+        this.newsEventSource.addEventListener('top-news-people-' + id + '-' + this.random, this.myListener, true);
+        this.newsEventSource.addEventListener('top-news-tags-' + id + '-' + this.random, this.myListener, true);
     }
     addToSubjectSingle = (subj: BehaviorSubject<NewsPayload[]>, event: any) => {
         const topNews = JSON.parse(event.data);
@@ -218,13 +218,13 @@ export class ReactiveStreamsService {
             this.ntagBehaviorSubject.next(tj);
         }
     }
-    setUserListListeners(id: string, random: number) {
+    setUserListListeners(id: string) {
         if (id.charAt(0) === '@') {
             const myB=this.topList.get('top-news-' + id);
             if (myB) myB.push('follow');
             else this.topList.set('top-news-' + id, ['follow']);
         }
-        this.newsEventSource.addEventListener('top-news-' + id + '-' + random, this.myListener, true);
+        this.newsEventSource.addEventListener('top-news-' + id + '-' + this.random, this.myListener, true);
         this.newsEventSource.addEventListener('top-news-' + id, this.myListener, true);
     }
     resetOtherListListeners(id: string, isMe = false) {
@@ -251,10 +251,10 @@ export class ReactiveStreamsService {
         this.ntagBehaviorSubject.next([]);
         this.unsubscribeResource();
     }
-    setOtherListener(id: string, random: number) {
+    setOtherListener(id: string) {
         if (!this.topList.has('top-news-' + id)) {
             this.topList.set('top-news-' + id, ['other']);
-            this.newsEventSource.addEventListener('top-news-' + id + '-' + random, this.heListener, true);
+            this.newsEventSource.addEventListener('top-news-' + id + '-' + this.random, this.heListener, true);
             this.newsEventSource.addEventListener('top-news-' + id, this.heListener, true);
             this.newsEventSource.addEventListener('user-counts-' + id, event => {
                 const userCounts = JSON.parse(event.data);
