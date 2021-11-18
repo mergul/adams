@@ -13,7 +13,6 @@ export class FollowersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('FollowersComponent.ngOnInit', history.state.users);
     this.link = history.state.link;
     this.tags = history.state.tags;
     this.users = history.state.users;
