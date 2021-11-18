@@ -16,7 +16,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly destroy = new Subject<void>();
   private newslistUrl: string;
   _loggedinUser = false;
-  isChildRoutePath=false;
+  isChildRoutePath = false;
+  isNeighbor = false;
 
   constructor(private reactiveService: ReactiveStreamsService, public ui: LoaderService, private router: Router,
     public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
@@ -26,19 +27,24 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.newslistUrl = '/sse/chat/room/TopNews' + this.reactiveService.random + '/subscribeMessages';
     this.router.events.pipe(takeUntil(this.destroy), filter((e): e is NavigationEnd => e instanceof NavigationEnd),
       map((event: any) => {
-        const ll=event.urlAfterRedirects.split('/').slice(1);
-        const l=Math.min(ll.length-1, this.newsService.getBreadcrumbList().length-1);
-        this.isChildRoutePath = this.newsService.getBreadcrumbList()[l]==ll[l];
+        const ll = event.urlAfterRedirects.split('/').slice(1);
+        const l = Math.min(ll.length - 1, this.newsService.getBreadcrumbList().length - 1);
+        this.isChildRoutePath = this.newsService.getBreadcrumbList()[l] == ll[l];
+        this.isNeighbor = l > 0 && this.newsService.getBreadcrumbList()[l - 1] == ll[l - 1];
         this.newsService.setBreadcrumbList(event.urlAfterRedirects.split('/').slice(1));
-    })).subscribe(() => {
-      if(!this.isChildRoutePath){
-        window.scrollTo(0, 0);
-      }
-    });
+      })).subscribe(() => {
+        if (!this.isChildRoutePath) {
+          if (this.isNeighbor) {
+            window.scrollTo(0, 300);
+          } else {
+            window.scrollTo(0, 0);
+          }
+        }
+      });
   }
   receiveMessage($event) {
     this._loggedinUser = $event;
-    console.log('receiveMessage --> '+$event);
+    console.log('receiveMessage --> ' + $event);
   }
   ngOnInit(): void {
 
@@ -48,12 +54,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.destroy.complete();
   }
   ngAfterViewInit(): void {
-    this.ui.isLoading.pipe(takeUntil(this.destroy), map(value=>{    
-      this.zone.runOutsideAngular(() =>{
+    this.ui.isLoading.pipe(takeUntil(this.destroy), map(value => {
+      this.zone.runOutsideAngular(() => {
         const el = this.winRef.nativeWindow.document.getElementById('spinner');
-        el.style.display = value?'block':'none';
-        value?el.nextSibling.classList.add('blurred'):el.nextSibling.classList.remove('blurred');
-      }) 
+        el.style.display = value ? 'block' : 'none';
+        value ? el.nextSibling.classList.add('blurred') : el.nextSibling.classList.remove('blurred');
+      })
     })).subscribe();
     this.zone.run(() => {
       this.winRef.nativeWindow.onload = () => {

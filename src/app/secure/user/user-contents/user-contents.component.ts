@@ -19,7 +19,7 @@ export class UserContentsComponent implements OnInit {
  // ];
   list: Observable<NewsPayload[]>;
   constructor(private newsService: NewsService) { 
-    this.list = this.newsService.newsStreamList$;
+    this.list = this.newsService.meStreamList$;
   }
 
   ngOnInit(): void {

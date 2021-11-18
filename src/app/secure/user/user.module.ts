@@ -8,6 +8,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { AuthGuard } from '../auth.guard';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { DetailsComponent } from '../../details/details.component';
+import { ProfileListComponent } from './profile-list/profile-list.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [AuthGuard],
@@ -26,7 +27,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserComponent, UserContentsComponent, FollowersComponent, UserEditComponent, ProfileCardComponent,
+    UserComponent, UserContentsComponent, FollowersComponent, UserEditComponent, ProfileCardComponent, ProfileListComponent,
   ],
   imports: [
     CommonModule, RouterModule.forChild(routes)

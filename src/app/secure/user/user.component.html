@@ -7,7 +7,7 @@
   </section>
   <section class="paths">
     <ol>
-      <li *ngFor="let item of this.newaService._masterBreadcrumbList;let i=index;">
+      <li *ngFor="let item of this.newsService._masterBreadcrumbList;let i=index;">
         <a [routerLink]="[i==0?'../../'+item:(i==1?'../'+item:'./'+item)]"> --> {{item}}</a>
       </li>
     </ol>
@@ -18,9 +18,9 @@
       <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
     </article>
     <button routerLink="contents" [class.active]="viewMode">içerikler</button>
-    <button routerLink="followee" [state]="{'link': '0'}">izlenen kişiler</button>
-    <button routerLink="followco" [state]="{'link': '1'}">izlenen konular</button>
-    <button routerLink="followers" [state]="{'link': '2'}">takipçiler</button>
+    <button routerLink="followee" [state]="{'link': '0', 'users': (this.userService._me|async)?.users}">izlenen kişiler</button>
+    <button routerLink="followco" [state]="{'link': '1', 'tags': (this.userService._me|async)?.tags}">izlenen konular</button>
+    <button routerLink="followers" [state]="{'link': '2', 'users': (this.userService._me|async)?.followers}">takipçiler</button>
     <button routerLink="user-edit">güncelle</button>
   </section>
   <section class="center">

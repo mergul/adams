@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-followers',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FollowersComponent implements OnInit {
   link!: string;
-  tags = ['1', '2', '3'];
+  users!: Array<string>;
+  tags!: Array<string>;
   constructor() { }
 
   ngOnInit(): void {
+    console.log('FollowersComponent.ngOnInit', history.state.users);
     this.link = history.state.link;
+    this.tags = history.state.tags;
+    this.users = history.state.users;
   }
-
 }

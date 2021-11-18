@@ -6,7 +6,6 @@ import { EMPTY, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { UserService } from '../core/user.service';
 import { ReactiveStreamsService } from '../core/reactive-streams.service';
-import { MyUser } from '../core/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,52 +14,52 @@ export class AuthService implements OnInit, OnDestroy {
   private readonly destroy = new Subject();
   public readonly user: Observable<User | null> = EMPTY;
   token!: Observable<string>;
-  userData!: MyUser;
   isMobile!: boolean;
-  isRedirected= false;
+  isRedirected = false;
 
   constructor(@Optional() private auth: Auth, private router: Router, private ngZone: NgZone, private userService: UserService
-  , private reactiveService: ReactiveStreamsService) {
-   // this.afAuth.useEmulator("http://localhost:9099");
-    this.isMobile=window.innerWidth<600;
+    , private reactiveService: ReactiveStreamsService) {
+    // this.afAuth.useEmulator("http://localhost:9099");
+    this.isMobile = window.innerWidth < 600;
     if (auth) {
       this.user = authState(this.auth);
       authState(this.auth).pipe(takeUntil(this.destroy),
-      traceUntilFirst('auth'),
-      switchMap(user => {
+        traceUntilFirst('auth'),
+        switchMap(user => {
+          if (user) {
+            this.userService.authChangeEmitter.next({ isIn: true, name: user.displayName! });
+            localStorage.setItem('username', JSON.stringify(user.displayName));
+            const id = this.userService.createId(user.uid);
+            this.reactiveService.setListeners('@' + id);
+            return this.userService.getDbUser('/api/rest/start/user/' + id + '/' + this.reactiveService.random);
+          } else {
+            this.userService.authChangeEmitter.next({ isIn: false, name: "" });
+            localStorage.setItem('username', '');
+            return of(null);
+          }
+        })
+      ).subscribe((user) => {
         if (user) {
-          this.userService.authChangeEmitter.next({isIn: true, name: user.displayName!});
-          localStorage.setItem('username', JSON.stringify(user.displayName));
-          const id = this.userService.createId(user.uid);
-          this.reactiveService.setListeners('@' + id);
-          return this.userService.getDbUser('/api/rest/start/user/' + '@' + id);
-        } else {
-          this.userService.authChangeEmitter.next({isIn: false, name: ""});
-          localStorage.setItem('username', '');
-          return of(null);
+          this.userService._me=of(user);
+          this.userService.newsCo.set(this.userService.links[1], user.tags.map(value => {
+            this.reactiveService.setUserListListeners('#' + value);
+            return '#' + value;
+          }));
+          this.userService.newsCo.set(this.userService.links[2], user.users.map(value => {
+            this.reactiveService.setUserListListeners('@' + value);
+            return '@' + value;
+          }));
         }
-      })
-    ).subscribe((user) => {
-      if (user) {
-        this.userService.newsCo.set(this.userService.links[1], this.userData.tags.map(value => {
-        this.reactiveService.setUserListListeners('#' + value);
-        return '#' + value;
-      }));
-      this.userService.newsCo.set(this.userService.links[2], this.userData.users.map(value => {
-          this.reactiveService.setUserListListeners('@' + value);
-          return '@' + value;
-      }));
-      }
-    });
+      });
+    }
+    this.userService.logoutEmitter.pipe(takeUntil(this.destroy)).subscribe(async ss => {
+      await this.signOut();
+    })
   }
-  this.userService.logoutEmitter.pipe(takeUntil(this.destroy)).subscribe(async ss=>{
-    await this.signOut();
-  })
-  }
-  get isLoggedIn(): ReplaySubject<{isIn: boolean, name: string}> {
+  get isLoggedIn(): ReplaySubject<{ isIn: boolean, name: string }> {
     return this.userService.authChangeEmitter;
   }
-  
+
   async loginToGoogle() {
     const asd = await import("./GoogleAuthProvider");
     const provider = new asd.GoogleAuthProvider();//GoogleAuthProvider();
@@ -76,7 +75,7 @@ export class AuthService implements OnInit, OnDestroy {
   }
 
   async resetPassword(email: string) {
-    const asd=await import("./FirebaseActions");
+    const asd = await import("./FirebaseActions");
     return await asd.sendPasswordResetEmail(this.auth, email, {
       'url': 'http://localhost:4200/auth', // Here we redirect back to this same page.
       'handleCodeInApp': true // This must be true.
@@ -85,16 +84,16 @@ export class AuthService implements OnInit, OnDestroy {
       .catch((error: any) => console.log(error));
   }
   async confirmPasswordReset(actionCode: string, newPassword: string) {
-    const asd=await import("./FirebaseActions");
+    const asd = await import("./FirebaseActions");
     return await asd.confirmPasswordReset(this.auth, actionCode, newPassword);
   }
   async verifyPasswordResetCode(actionCode: string) {
-    const asd=await import("./FirebaseActions");
+    const asd = await import("./FirebaseActions");
     return await asd.verifyPasswordResetCode(this.auth, actionCode);
   }
 
   async signUp(email: string, password: string) {
-    const asd=await import("./FirebaseActions");
+    const asd = await import("./FirebaseActions");
 
     return await asd.createUserWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
@@ -107,7 +106,7 @@ export class AuthService implements OnInit, OnDestroy {
   }
   // Sign in with email/password
   async signIn(email: string, password: string) {
-    const asd=await import("./FirebaseActions");
+    const asd = await import("./FirebaseActions");
     return await asd.signInWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         this.ngZone.run(() => {
@@ -121,13 +120,15 @@ export class AuthService implements OnInit, OnDestroy {
     localStorage.removeItem('is');
     localStorage.removeItem('username');
     localStorage.removeItem('returnUrl');
-    for (const tag of this.userData.tags) {
-      this.reactiveService.resetUserListListeners('#' + tag);
-    }        
-    for (const tag of this.userData.users) {
-      this.reactiveService.resetUserListListeners('@' + tag, true);
-    }
-    const asd=await import("./FirebaseActions");
+    this.userService._me.pipe(takeUntil(this.destroy)).subscribe(user => {
+      for (const tag of user!.tags) {
+        this.reactiveService.resetUserListListeners('#' + tag);
+      }
+      for (const tag of user!.users) {
+        this.reactiveService.resetUserListListeners('@' + tag, true);
+      }
+    });
+    const asd = await import("./FirebaseActions");
     return await asd.signOut(this.auth);
   }
   async emitRedirectResult() {
@@ -135,7 +136,7 @@ export class AuthService implements OnInit, OnDestroy {
     return await asd.getRedirectResult(this.auth);
   }
   ngOnInit(): void { }
-  
+
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();

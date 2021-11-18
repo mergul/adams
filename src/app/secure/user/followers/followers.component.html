@@ -1,4 +1,6 @@
-<app-profile-card *ngIf="link!='1'"></app-profile-card>
+<app-profile-list *ngIf="link!='1'" [users]="users" class="users"></app-profile-list>
 <div *ngIf="link=='1'" class="tags">
-    <button *ngFor="let tag of tags" class="butto ripple button-outline">takip edilen etiket{{tag}}</button>
+    <div class="tag" *ngFor="let tag of tags">
+    <label>#{{tag}}</label>
+    <button class="butto ripple button-outline">Takibi Kes</button>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { NewsService } from 'src/app/core/news.service';
+import { ReactiveStreamsService } from 'src/app/core/reactive-streams.service';
+import { UserService } from 'src/app/core/user.service';
 
 @Component({
   selector: 'app-user',
@@ -9,11 +10,11 @@ import { NewsService } from 'src/app/core/news.service';
 })
 export class UserComponent implements OnInit, OnDestroy{
   viewMode=true;
-  constructor(public newaService: NewsService) { 
+
+  constructor(public newsService: NewsService, public userService: UserService, private reactive: ReactiveStreamsService) { 
   }
   ngOnDestroy(): void {
   }
   ngOnInit(): void {
   }
-
 }

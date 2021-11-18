@@ -20,7 +20,7 @@ export class ReactiveStreamsService {
     private balanceBehaviorSubject = new BehaviorSubject<BalanceRecord[]>([]);
     publicStreamList$: Map<string, NewsPayload[]> = new Map<string, NewsPayload[]>();
     private hotUsersBehaviorSubject = new BehaviorSubject<BalanceRecord[]>([]);
-    random: number=0;
+    random: number = 0;
     isSubscribed = true;
     index: number=0;
     topList: Map<string, Array<string>> = new Map<string, Array<string>>();

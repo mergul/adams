@@ -23,7 +23,8 @@ import { TokenInterceptor } from './core/token.interceptor';
     useClass: TokenInterceptor,
     multi: true
   },],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [BrowserModule]
 })
 export class AppModule { }
 
