@@ -1,6 +1,10 @@
-<app-profile-list *ngIf="link!='1'" [users]="users" class="users"></app-profile-list>
-<div *ngIf="link=='1'" class="tags">
-    <div class="tag" *ngFor="let tag of tags">
+<ng-container [ngSwitch]="(route.data|async)?.link">
+<app-profile-list *ngSwitchCase="0" [me]="userService._me" [mtype]="1" class="users"></app-profile-list>
+<app-profile-list *ngSwitchCase="1" [me]="userService._me" [mtype]="2" class="users"></app-profile-list>
+<div *ngSwitchCase="2" class="tags">
+    <div class="tag" *ngFor="let tag of (userService._me|async)?.tags">
     <label>#{{tag}}</label>
     <button class="butto ripple button-outline">Takibi Kes</button>
 </div>
+</div>
+</ng-container>

@@ -33,11 +33,13 @@
           <input type="text" placeholder="Search">
         </div>
       </li>
-      <li class="nav-item-dropdown navuser" [ngSwitch]="isLogged">
-        <a id="gir" routerLink="secure/sign" *ngSwitchCase="false">Giriş Yap</a>
+      <li class="nav-item-dropdown navuser">
+        <ng-container *ngIf="(userService.authChangeEmitter|async)||{isIn: name!=='', name: name} as auth">
+        <ng-container [ngSwitch]="auth.isIn">
+        <a *ngSwitchCase="false" id="gir" routerLink="secure/sign">Giriş Yap</a>
         <figure *ngSwitchCase="true" class="user online dropdown-trigger">
           <img src="assets/profile-img.jpeg" class="online-user" width="50px" height="50px" alt="user" />
-          <figcaption>{{name}}</figcaption>
+          <figcaption>{{auth.name}}</figcaption>
         </figure>
         <ul *ngSwitchCase="true" class="dropdown-menu">
           <li class="dropdown-menu-item">
@@ -50,6 +52,8 @@
             <button (click)="signOut()">Çıkış</button>
           </li>
         </ul>
+        </ng-container>
+      </ng-container>
       </li>
     </ul>
   </nav>

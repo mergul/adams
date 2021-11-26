@@ -2,8 +2,8 @@ import { Injectable, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Auth, authState, User } from '@angular/fire/auth';
-import { EMPTY, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { EMPTY, forkJoin, from, Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { concatMap, exhaustMap, map, mergeMap, switchMap, takeUntil } from 'rxjs/operators';
 import { UserService } from '../core/user.service';
 import { ReactiveStreamsService } from '../core/reactive-streams.service';
 
@@ -13,7 +13,6 @@ import { ReactiveStreamsService } from '../core/reactive-streams.service';
 export class AuthService implements OnInit, OnDestroy {
   private readonly destroy = new Subject();
   public readonly user: Observable<User | null> = EMPTY;
-  token!: Observable<string>;
   isMobile!: boolean;
   isRedirected = false;
 
@@ -27,20 +26,30 @@ export class AuthService implements OnInit, OnDestroy {
         traceUntilFirst('auth'),
         switchMap(user => {
           if (user) {
-            this.userService.authChangeEmitter.next({ isIn: true, name: user.displayName! });
-            localStorage.setItem('username', JSON.stringify(user.displayName));
-            const id = this.userService.createId(user.uid);
-            this.reactiveService.setListeners('@' + id);
-            return this.userService.getDbUser('/api/rest/start/user/' + id + '/' + this.reactiveService.random);
+                this.userService.authChangeEmitter.next({ isIn: true, name: user.displayName! });
+                localStorage.setItem('username', JSON.stringify(user.displayName));
+                const id = this.userService.createId(user.uid);
+                this.reactiveService.setListeners('@' + id);
+                return forkJoin({id: of(id), token: from(user.getIdToken())});
+          } else {
+                this.userService.authChangeEmitter.next({ isIn: false, name: "" });
+                localStorage.setItem('username', '');
+                return forkJoin({id: of(''), token: of('')});
+          }
+        }), switchMap(({id, token}) => {
+          if (id) {
+            localStorage.setItem('token', token);
+            return this.userService.getDbUser('/api/rest/user/' + id + '/' + this.reactiveService.random+ '/0');
           } else {
             this.userService.authChangeEmitter.next({ isIn: false, name: "" });
             localStorage.setItem('username', '');
             return of(null);
           }
+
         })
       ).subscribe((user) => {
+        this.userService._meSubject.next(user);
         if (user) {
-          this.userService._me=of(user);
           this.userService.newsCo.set(this.userService.links[1], user.tags.map(value => {
             this.reactiveService.setUserListListeners('#' + value);
             return '#' + value;

@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/core/user.service';
 
 @Component({
   selector: 'app-followers',
   templateUrl: './followers.component.html',
-  styleUrls: ['./followers.component.scss']
+  styleUrls: ['./followers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FollowersComponent implements OnInit {
-  link!: string;
+  link!: number;
   users!: Array<string>;
   tags!: Array<string>;
-  constructor() { }
+  constructor(public userService: UserService, public route: ActivatedRoute) {
+    console.log('FollowersComponent');
+   }
 
   ngOnInit(): void {
-    this.link = history.state.link;
-    this.tags = history.state.tags;
-    this.users = history.state.users;
   }
 }

@@ -58,7 +58,7 @@
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js';  // Included with Angular CLI.
-
+import 'zone.js/dist/zone-patch-rxjs'; // Import RxJS patch to make sure RxJS runs in the correct zone
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

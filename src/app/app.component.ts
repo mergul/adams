@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
@@ -10,12 +10,12 @@ import { WindowRef } from './core/window.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly destroy = new Subject<void>();
   private newslistUrl: string;
-  _loggedinUser = false;
   isChildRoutePath = false;
   isNeighbor = false;
 
@@ -35,33 +35,23 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       })).subscribe(() => {
         if (!this.isChildRoutePath) {
           if (this.isNeighbor) {
-            window.scrollTo(0, 300);
+            if (this.winRef.nativeWindow.scrollY>300) {
+              window.scrollTo(0, 300);
+            }
           } else {
             window.scrollTo(0, 0);
           }
         }
       });
   }
-  receiveMessage($event) {
-    this._loggedinUser = $event;
-    console.log('receiveMessage --> ' + $event);
-  }
   ngOnInit(): void {
-
   }
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
   }
   ngAfterViewInit(): void {
-    this.ui.isLoading.pipe(takeUntil(this.destroy), map(value => {
-      this.zone.runOutsideAngular(() => {
-        const el = this.winRef.nativeWindow.document.getElementById('spinner');
-        el.style.display = value ? 'block' : 'none';
-        value ? el.nextSibling.classList.add('blurred') : el.nextSibling.classList.remove('blurred');
-      })
-    })).subscribe();
-    this.zone.run(() => {
+   // this.zone.run(() => {
       this.winRef.nativeWindow.onload = () => {
         if (!this.reactiveService.statusOfNewsSource()) {
           this.reactiveService.getNewsStream(this.reactiveService.random, this.newslistUrl);
@@ -70,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.newsService.newsStreamList$ = this.reactiveService.getMessage(this.newsService.links[0]);
           this.newsService.tagsStreamList$ = this.reactiveService.getMessage(this.newsService.links[1]);
           this.newsService.peopleStreamList$ = this.reactiveService.getMessage(this.newsService.links[2]);
-          this.newsService.meStreamList$ = this.reactiveService.getMessage('me');
+          if(!this.newsService.meStreamList$)this.newsService.meStreamList$ =  this.reactiveService.getMessage('me');
           this.newsService.newsStreamCounts$ = this.reactiveService.getMessage('user-counts')
             .pipe(map(record => {
               if (record.key) {
@@ -84,6 +74,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             value.filter((value1: { key: string; }) =>
               value1.key.charAt(0) === '#')));
       }
-    });
+  //  });
   }
 }
+ // this.ui.isLoading.pipe(takeUntil(this.destroy), map(value => {
+    //    this.zone.run(() => {
+    //     const el = this.winRef.nativeWindow.document.getElementById('spinner');
+    //     el.style.display = value ? 'block' : 'none';
+    //     value ? el.nextSibling.classList.add('blurred') : el.nextSibling.classList.remove('blurred');
+    //    })
+    // })).subscribe();

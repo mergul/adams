@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NewsPayload } from 'src/app/core/news.model';
 import { NewsService } from 'src/app/core/news.service';
@@ -6,23 +6,21 @@ import { NewsService } from 'src/app/core/news.service';
 @Component({
   selector: 'app-user-contents',
   templateUrl: './user-contents.component.html',
-  styleUrls: ['./user-contents.component.scss']
+  styleUrls: ['./user-contents.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserContentsComponent implements OnInit {
-  // list = ['assets/thumb-kapak-bae.jpeg', 'assets/thumb-kapak-bae.jpeg', 'assets/thumb-kapak-bae.jpeg'
-  // , 'assets/thumb-kapak-bae.jpeg', 'assets/thumb-kapak-bae.jpeg'
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/kenan-sulayman-FV3M7igu8Fs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/anastasia-dulgier-NCFTGtjY3EQ-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/arnaud-mariat-IPXcUYHeErc-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/jakob-owens-EkxOtUljwhs-unsplash.jpg',
-    // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/14179/tim-bogdanov-4uojMEdcwI8-unsplash.jpg',
- // ];
-  list: Observable<NewsPayload[]>;
-  constructor(private newsService: NewsService) { 
-    this.list = this.newsService.meStreamList$;
+  meList!: Observable<NewsPayload[]>;
+  constructor(public newsService: NewsService) { 
   }
 
   ngOnInit(): void {
+    this.meList = this.newsService.meStreamList$;
   }
-
+  byId(index: number, item: NewsPayload) {
+    if (!item) {
+      return '0';
+    }
+    return item.newsId;
+  }
 }

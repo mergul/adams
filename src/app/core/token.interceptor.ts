@@ -8,8 +8,7 @@ const methods = ['PUT', 'POST', 'DELETE', 'PATCH'];
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor(private ui: LoaderService) {
-    }
+    constructor(private ui: LoaderService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('token');
         if (!methods.includes(request.method) && !request.url.includes('rest/user/') && !request.url.includes('/balance/')) {

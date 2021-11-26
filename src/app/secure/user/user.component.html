@@ -18,9 +18,9 @@
       <p>Burada dünyaya geldi. Bu dünyada yetişti.</p>
     </article>
     <button routerLink="contents" [class.active]="viewMode">içerikler</button>
-    <button routerLink="followee" [state]="{'link': '0', 'users': (this.userService._me|async)?.users}">izlenen kişiler</button>
-    <button routerLink="followco" [state]="{'link': '1', 'tags': (this.userService._me|async)?.tags}">izlenen konular</button>
-    <button routerLink="followers" [state]="{'link': '2', 'users': (this.userService._me|async)?.followers}">takipçiler</button>
+    <button routerLink="followee">izlenen kişiler</button>
+    <button routerLink="followco">izlenen konular</button>
+    <button routerLink="followers">takipçiler</button>
     <button routerLink="user-edit">güncelle</button>
   </section>
   <section class="center">

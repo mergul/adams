@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { BalanceRecord, MyUser } from './user.model';
 
 @Injectable({
@@ -11,7 +11,8 @@ export class UserService {
   logoutEmitter = new EventEmitter<boolean>();
   authChangeEmitter = new ReplaySubject<{ isIn: boolean, name: string }>(1);
   _otherUser!: Observable<MyUser|null>;
-  _me!: Observable<MyUser|null>;
+  _meSubject: BehaviorSubject<MyUser|null> = new BehaviorSubject<MyUser|null>(null);
+  _me = this._meSubject.asObservable();
   _hotBalance!: Observable<BalanceRecord[]>;
   _historyBalance!: Observable<BalanceRecord[]>;
   links = ['En Çok Okunanlar', 'Takip Edilen Etiketler', 'Takip Edilen Kişiler'];

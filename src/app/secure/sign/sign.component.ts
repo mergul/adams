@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, of, Subject } from 'rxjs';
 import { LoaderService } from 'src/app/core/loader.service';
@@ -7,7 +7,8 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-sign',
   templateUrl: './sign.component.html',
-  styleUrls: ['./sign.component.scss']
+  styleUrls: ['./sign.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignComponent implements OnInit, OnDestroy {
   viewMode = 'signup';

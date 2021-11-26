@@ -1,6 +1,6 @@
 <article class="article-top">
     <ul>
-        <li *ngFor="let post of list|async">
+        <li *ngFor="let post of meList|async; trackBy: byId">
             <a [routerLink]="[post.newsId]">
                 <section class="fi">
                     <figure class="figure">

@@ -19,9 +19,9 @@ const routes: Routes = [
             { path: 'contents', component: UserContentsComponent, children: [
               { path: ':id', component: DetailsComponent}
             ]},
-            { path: 'followers', component: FollowersComponent}, 
-            { path: 'followee', component: FollowersComponent},          
-            { path: 'followco', component: FollowersComponent}
+            { path: 'followers', component: FollowersComponent, data: {link: 0}}, 
+            { path: 'followee', component: FollowersComponent, data: {link: 1}},          
+            { path: 'followco', component: FollowersComponent, data: {link: 2}},
           ]
   }];
 
