@@ -18,7 +18,7 @@ export class ReactiveStreamsService {
     private npeopleBehaviorSubject = new BehaviorSubject<NewsPayload[]>([]);
     private meBehaviorSubject = new BehaviorSubject<NewsPayload[]>([]);
     private balanceBehaviorSubject = new BehaviorSubject<BalanceRecord[]>([]);
-    publicStreamList$: Map<string, NewsPayload[]> = new Map<string, NewsPayload[]>();
+    publicUsersStreamList$: Map<string, NewsPayload[]> = new Map<string, NewsPayload[]>();
     private hotUsersBehaviorSubject = new BehaviorSubject<BalanceRecord[]>([]);
     random: number = 0;
     isSubscribed = true;
@@ -157,13 +157,19 @@ export class ReactiveStreamsService {
                 this.resetUserListListeners(id);
                 this.topList.set('top-news-' + id, myB.filter(fer => fer !== 'follow'));
             }
+        }        
+        if (!this.topList.has('top-news-' + id)) {
+            this.topList.set('top-news-' + id, ['me']);
+            this.zone.runOutsideAngular(() => {
+                this.newsEventSource.addEventListener('top-news-' + id + '-' + this.random, this.meListener, true);
+                this.newsEventSource.addEventListener('top-news-people-' + id + '-' + this.random, this.myListener, true);
+                this.newsEventSource.addEventListener('top-news-tags-' + id + '-' + this.random, this.myListener, true);
+            });
+        } else if (this.publicUsersStreamList$.has(id.substring(1))) {
+            const myB = this.publicUsersStreamList$.get(id.substring(1));
+            if (myB)
+               this.zone.run(() => this.meBehaviorSubject.next(myB));
         }
-        this.topList.set('top-news-' + id, ['me']);
-        this.zone.runOutsideAngular(() => {
-            this.newsEventSource.addEventListener('top-news-' + id + '-' + this.random, this.meListener, true);
-            this.newsEventSource.addEventListener('top-news-people-' + id + '-' + this.random, this.myListener, true);
-            this.newsEventSource.addEventListener('top-news-tags-' + id + '-' + this.random, this.myListener, true);
-        });
     }
     addToSubjectSingle = (subj: BehaviorSubject<NewsPayload[]>, event: any) => {
         const topNews = JSON.parse(event.data);
@@ -173,9 +179,10 @@ export class ReactiveStreamsService {
     listenIt = (isMe, isOther, event: any) => {
         if (isMe) {
             this.addToSubjectSingle(this.getNewsSubject('me'), event);
+            this.publicUsersStreamList$.set(event.type.split('-')[2].substring(1),this.meBehaviorSubject.getValue());
         } else if (isOther) {
             this.addToSubjectSingle(this.getNewsSubject('other'), event);
-            this.publicStreamList$.set(event.type.split('-')[2].substring(1), this.publicBehaviorSubject.getValue());
+            this.publicUsersStreamList$.set(event.type.split('-')[2].substring(1), this.publicBehaviorSubject.getValue());
         } else if (event.lastEventId === 'people' || event.lastEventId === 'tags') {
             this.addToSubjectSingle(this.getNewsSubject(event.lastEventId), event);
         } else if (event.lastEventId === 'me') {
@@ -200,7 +207,7 @@ export class ReactiveStreamsService {
             });
             subj.next(array3);
             if (event.lastEventId === 'me') {
-                this.publicStreamList$.set(event.type.split('-')[2].substring(1), topNews.list);
+                this.publicUsersStreamList$.set(event.type.split('-')[2].substring(1), topNews.list);
             }
         });
     }
@@ -269,8 +276,8 @@ export class ReactiveStreamsService {
                     this.zone.run(() => this.countsBehaviorSubject.next(userCounts));
                 });
             });
-        } else if (this.publicStreamList$.has(id.substring(1))) {
-            const myB = this.publicStreamList$.get(id.substring(1));
+        } else if (this.publicUsersStreamList$.has(id.substring(1))) {
+            const myB = this.publicUsersStreamList$.get(id.substring(1));
             if (myB)
                 this.publicBehaviorSubject.next(myB);
         } else this.publicBehaviorSubject.next(this.npeopleBehaviorSubject.getValue().filter(val => val.newsOwnerId === id.substring(1)));

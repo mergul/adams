@@ -1,6 +1,7 @@
 <article class="article-top">
     <ul>
-        <li *ngFor="let post of meList|async; trackBy: byId">
+        <ng-container *ngIf="(meList|async) as mylist; else loading">
+        <li *ngFor="let post of mylist; trackBy: byId">
             <a [routerLink]="[post.newsId]">
                 <section class="fi">
                     <figure class="figure">
@@ -15,6 +16,8 @@
                 </section>
             </a>
         </li>
+    </ng-container>
+    <ng-template #loading><span>Loading...</span></ng-template>
     </ul>
 </article>
 <router-outlet></router-outlet>

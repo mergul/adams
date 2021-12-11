@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { NewsService } from 'src/app/core/news.service';
 import { UserService } from 'src/app/core/user.service';
 
@@ -6,16 +11,15 @@ import { UserService } from 'src/app/core/user.service';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserComponent implements OnInit, OnDestroy{
-  viewMode=true;
+export class UserComponent implements OnInit, OnDestroy {
+  viewMode = true;
 
-  constructor(public newsService: NewsService, public userService: UserService) {
-    console.log('UserComponent');
-  }
-  ngOnDestroy(): void {
-  }
-  ngOnInit(): void {
-  }
+  constructor(
+    public newsService: NewsService,
+    public userService: UserService
+  ) {}
+  ngOnDestroy(): void {}
+  ngOnInit(): void {}
 }

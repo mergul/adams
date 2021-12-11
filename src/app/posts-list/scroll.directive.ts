@@ -23,7 +23,7 @@ export class ScrollDirective {
         this.scrollObs(scrollElement, matime).pipe(takeUntil(this.destroy$)).subscribe(() => {
             const px=scrollElement.scrollLeft||this.winRef.nativeWindow.scrollX;
             const py=scrollElement.scrollTop||this.winRef.nativeWindow.scrollY;
-            if (this.pointValue.x !== px||this.pointValue.y !== py) {
+            if (this.pointValue.x < px||this.pointValue.y < py) {
                 this.pointValue = {x: px, y: py};
                 this.onScroll.emit(this.pointValue);
             }

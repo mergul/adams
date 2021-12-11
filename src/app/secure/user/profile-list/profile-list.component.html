@@ -1,7 +1,9 @@
-<ng-container *ngIf="(me|async) as me">
+<ng-container *ngIf="(me|async) as me; else mloading">
 <ng-container *ngIf="(mtype==1?me.followers:me.users ) as list">
 <div *ngFor="let user of list">
     <app-profile-card [userName]="user" [isFollower]="true"></app-profile-card>
 </div>
 </ng-container>
 </ng-container>
+<ng-template #mloading><span>Loading...</span></ng-template>
+<router-outlet></router-outlet>

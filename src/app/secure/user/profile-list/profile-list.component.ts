@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { MyUser } from 'src/app/core/user.model';
 
@@ -6,21 +11,20 @@ import { MyUser } from 'src/app/core/user.model';
   selector: 'app-profile-list',
   templateUrl: './profile-list.component.html',
   styleUrls: ['./profile-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileListComponent implements OnInit {
   _users!: Array<string>;
-  _me!: Observable<MyUser| null>;
+  _me!: Observable<MyUser | null>;
   private _mtype!: number;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   @Input()
-  get me(): Observable<MyUser|null> {
+  get me(): Observable<MyUser | null> {
     return this._me;
   }
-  set me(value: Observable<MyUser|null>) {
+  set me(value: Observable<MyUser | null>) {
     this._me = value;
   }
 
@@ -30,5 +34,4 @@ export class ProfileListComponent implements OnInit {
   set mtype(value: number) {
     this._mtype = value;
   }
-
 }
