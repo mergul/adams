@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { LoaderService } from '@core/loader.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoaderService } from '../core/loader.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class SignGuard implements CanActivate {
           const returnUrl = localStorage.getItem('returnUrl');
           localStorage.setItem('is', '0');
           this.router.navigate([returnUrl ? returnUrl : 'secure/user']);
-        }
+        } else this.ui.hide();
         return true;
       });
     } else {

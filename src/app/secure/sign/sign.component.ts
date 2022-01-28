@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoaderService } from '@core/loader.service';
 import { Observable, of, Subject } from 'rxjs';
-import { LoaderService } from 'src/app/core/loader.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '@secure/auth.service';
 
 @Component({
   selector: 'app-sign',
@@ -22,7 +23,8 @@ export class SignComponent implements OnInit, OnDestroy {
   listenerFn!: () => void;
   EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
   isValidMailFormat = of(false);
-  constructor(private authService: AuthService, private fb: FormBuilder, private ui: LoaderService) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private ui: LoaderService
+    , private router: Router) {
     this.createForm();
   }
   ngOnDestroy(): void {
@@ -43,6 +45,9 @@ export class SignComponent implements OnInit, OnDestroy {
   async triedGoogleLogin() {
     this.ui.show();
     await this.authService.loginToGoogle();
+    setTimeout(() => {
+      this.router.navigate(['secure/user']);
+    }, 0);
   }
   sendResetEmail() {
     this.clearErrorMessage();

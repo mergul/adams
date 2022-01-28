@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoaderService } from '../core/loader.service';
+import { LoaderService } from '@core/loader.service';
 import { AuthService } from './auth.service';
 
 @Injectable({

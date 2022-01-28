@@ -4,8 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { MyUser } from '@core/user.model';
 import { Observable } from 'rxjs';
-import { MyUser } from 'src/app/core/user.model';
 
 @Component({
   selector: 'app-profile-list',

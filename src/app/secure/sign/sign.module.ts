@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SignComponent } from './sign.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SignGuard } from '../sign.guard';
+import { SignGuard } from '@secure/sign.guard';
+import { SharedModule } from 'app/shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: SignComponent, canActivate: [SignGuard]},
@@ -12,7 +13,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [SignComponent],
   imports: [
-    CommonModule, RouterModule.forChild(routes), ReactiveFormsModule
+    CommonModule, SharedModule, RouterModule.forChild(routes), ReactiveFormsModule
   ],
   providers: [ SignGuard ]
 })

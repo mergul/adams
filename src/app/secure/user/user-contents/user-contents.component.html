@@ -1,6 +1,7 @@
+<ng-container *ngIf="(this.newsService.meStreamList$|async) as mylist">
+<ng-container *ngIf="mylist.length>0; else sloading" >
 <article class="article-top">
     <ul>
-        <ng-container *ngIf="(meList|async) as mylist; else loading">
         <li *ngFor="let post of mylist; trackBy: byId">
             <a [routerLink]="[post.newsId]">
                 <section class="fi">
@@ -16,8 +17,9 @@
                 </section>
             </a>
         </li>
-    </ng-container>
-    <ng-template #loading><span>Loading...</span></ng-template>
     </ul>
 </article>
+</ng-container>
+</ng-container>
+<ng-template #sloading><h1>Loading...</h1></ng-template>
 <router-outlet></router-outlet>

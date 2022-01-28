@@ -1,11 +1,11 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { LoaderService } from './core/loader.service';
-import { NewsService } from './core/news.service';
-import { ReactiveStreamsService } from './core/reactive-streams.service';
-import { WindowRef } from './core/window.service';
+import { LoaderService } from '@core/loader.service';
+import { NewsService } from '@core/news.service';
+import { ReactiveStreamsService } from '@core/reactive-streams.service';
+import { WindowRef } from '@core/window.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   isNeighbor = false;
 
   constructor(private reactiveService: ReactiveStreamsService, public ui: LoaderService, private router: Router,
-    public newsService: NewsService, private zone: NgZone, private winRef: WindowRef) {
+    public newsService: NewsService, private winRef: WindowRef) {
     if (!this.reactiveService.random) {
       this.reactiveService.random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
     }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/core/user.service';
+import { UserService } from '@core/user.service';
 
 @Component({
   selector: 'app-followers',

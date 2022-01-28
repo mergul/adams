@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NewsPayload } from 'src/app/core/news.model';
-import { NewsService } from 'src/app/core/news.service';
+import { NewsPayload } from '@core/news.model';
+import { NewsService } from '@core/news.service';
 
 @Component({
   selector: 'app-user-contents',
@@ -10,12 +9,12 @@ import { NewsService } from 'src/app/core/news.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserContentsComponent implements OnInit {
-  meList!: Observable<NewsPayload[]>;
+  // meList!: Observable<NewsPayload[]>;
   constructor(public newsService: NewsService) { 
   }
 
   ngOnInit(): void {
-    this.meList = this.newsService.meStreamList$;
+    // this.meList = this.newsService.meStreamList$;
   }
   byId(index: number, item: NewsPayload) {
     if (!item) {

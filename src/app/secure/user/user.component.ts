@@ -4,8 +4,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { NewsService } from 'src/app/core/news.service';
-import { UserService } from 'src/app/core/user.service';
+import { NewsService } from '@core/news.service';
+import { UserService } from '@core/user.service';
 
 @Component({
   selector: 'app-user',

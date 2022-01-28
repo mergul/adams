@@ -1,8 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { NewsPayload } from './news.model';
 import { HttpHeaders } from '@angular/common/http';
+import { NewsPayload } from './news.model';
 import { RecordSSE } from './record.sse';
 import { BalanceRecord } from './user.model';
 

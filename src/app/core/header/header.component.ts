@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { LoaderService } from '../loader.service';
 import { UserService } from '../user.service';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-header',

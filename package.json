@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider; ng serve --proxy-config proxy.config.json",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -31,7 +31,7 @@
     "@angular/cli": "~12.2.5",
     "@angular/compiler-cli": "~12.2.5",
     "@types/jasmine": "~3.8.0",
-    "@types/node": "^12.20.37",
+    "@types/node": "^17.0.0",
     "event-source-polyfill": "^1.0.25",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
@@ -41,4 +41,4 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.3.5"
   }
-}
+} 

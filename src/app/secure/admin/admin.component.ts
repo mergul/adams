@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AuthService } from '@secure/auth.service';
 import { LazyLoadScriptService } from './lazy-load-script.service';
 
 @Component({

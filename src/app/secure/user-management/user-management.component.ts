@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AuthService } from '@secure/auth.service';
 
 export class UserManagementActions {
   static resetPassword = 'resetPassword';
@@ -18,7 +18,7 @@ export class UserManagementActions {
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
 
-  ngUnsubscribe: Subject<any> = new Subject<any>();
+  ngUnsubscribe = new Subject<void>();
   actions = UserManagementActions;
 
   // The user management actoin to be completed

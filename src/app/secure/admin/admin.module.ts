@@ -7,7 +7,8 @@ import { AdminAsideComponent } from './admin-aside/admin-aside.component';
 import { AdminMainComponent } from './admin-main/admin-main.component';
 import { AdminViewsComponent } from './admin-views/admin-views.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { AuthGuard } from '../auth.guard';
+import { AuthGuard } from '@secure/auth.guard';
+import { SharedModule } from 'app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
     AdminUsersComponent
   ],
   imports: [
-    CommonModule, RouterModule.forChild(routes), NgApexchartsModule
+    CommonModule, SharedModule, RouterModule.forChild(routes), NgApexchartsModule
   ],
   providers: [ AuthGuard ]
 })

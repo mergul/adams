@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/core/user.service';
 
 @Component({
   selector: 'app-profile-card',
@@ -13,7 +12,7 @@ export class ProfileCardComponent implements OnInit {
 
   @ViewChild('followButton', { static: false })
   followButton!: ElementRef;
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -5,10 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserContentsComponent } from './user-contents/user-contents.component';
 import { FollowersComponent } from './followers/followers.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
-import { AuthGuard } from '../auth.guard';
+import { AuthGuard } from '@secure/auth.guard';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
-import { DetailsComponent } from '../../details/details.component';
+import { DetailsComponent } from 'app/details/details.component';
 import { ProfileListComponent } from './profile-list/profile-list.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [AuthGuard],
@@ -30,7 +31,7 @@ const routes: Routes = [
     UserComponent, UserContentsComponent, FollowersComponent, UserEditComponent, ProfileCardComponent, ProfileListComponent,
   ],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, SharedModule, RouterModule.forChild(routes)
   ],
   providers: [AuthGuard]
 })

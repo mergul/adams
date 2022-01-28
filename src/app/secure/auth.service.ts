@@ -3,15 +3,15 @@ import { Router } from '@angular/router';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { Auth, authState, User } from '@angular/fire/auth';
 import { EMPTY, forkJoin, from, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
-import { UserService } from '../core/user.service';
-import { ReactiveStreamsService } from '../core/reactive-streams.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { UserService } from '@core/user.service';
+import { ReactiveStreamsService } from '@core/reactive-streams.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit, OnDestroy {
-  private readonly destroy = new Subject();
+  private readonly destroy = new Subject<void>();
   public readonly user: Observable<User | null> = EMPTY;
   isMobile!: boolean;
   isRedirected = false;
@@ -43,7 +43,8 @@ export class AuthService implements OnInit, OnDestroy {
               );
               const id = this.userService.createId(user.uid);
               this.reactiveService.setListeners('@' + id);
-              const url = this._baseUrl +id + '/' + this.reactiveService.random + '/0';
+              const url =
+                this._baseUrl + id + '/' + this.reactiveService.random + '/0';
               if (this.userService._meUrlStore.getValue() !== url) {
                 this.userService._meUrlStore.next(url);
               }
@@ -85,9 +86,6 @@ export class AuthService implements OnInit, OnDestroy {
                 return '@' + value;
               })
             );
-            if (this.isMobile && !this.router.url.startsWith('/secure/user')) {
-              this.router.navigate(['secure/user']);
-            }
           }
         });
     }
@@ -106,7 +104,7 @@ export class AuthService implements OnInit, OnDestroy {
     const provider = new asd.GoogleAuthProvider(); // GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    if (!this.isMobile) {
+    if (this.isMobile) {
       localStorage.setItem('is', '1');
       await asd.signInWithRedirect(this.auth, provider);
     } else {
@@ -166,8 +164,9 @@ export class AuthService implements OnInit, OnDestroy {
     localStorage.removeItem('is');
     localStorage.removeItem('username');
     localStorage.removeItem('returnUrl');
-    const user=this.userService._meStore.getValue();
+    const user = this.userService._meStore.getValue();
     if (user) {
+      this.reactiveService.resetNavListListeners('@' + user.id);
       for (const tag of user!.tags) {
         this.reactiveService.resetUserListListeners('#' + tag);
       }
